@@ -30,10 +30,34 @@ Within messageBoard.db you will find the following tables.Click the drop-downs b
 
 <details>
     <summary><code>comments</code> table</summary>
-    <code>notices</code> table contains the following columns <br/>
+    <code>comments</code> table contains the following columns <br/>
     <code>id</code> which is the id of the comment <br/>
     <code>notice_id</code> which is the id of the notice where user comments<br/>
     <code>user_id</code> which is the id of the user who comment on the notice<br/>
     <code>date</code> which is the date of the comment<br/>
     <code>description</code> which is the descriptions of the comment<br/>
 </details>
+
+## Endpoints
+
+REST Resource: notice<br/>
+<code>https://url/api/notice</code><br/>
+
+| Methods |                                                                                                                   |
+| ------- | ----------------------------------------------------------------------------------------------------------------- |
+| get     | GET /notice Gets information about the id,user_id,title,date,descrtiption for notice                              |
+| post    | POST /notice Create a new notice Send user_id,title,date,descrtiption to request body                             |
+| Update  | UPDATE /notice/:noticeId Update the notice which match the parameter id send id,title,description to request body |
+| Delete  | Delete /notice/:noticeId Delete the notice which match the parameter id                                           |
+
+</br>
+
+REST Resource: comment<br/>
+<code>https://url/api/notice/:noticeId/comment</code><br/>
+
+| Methods |                                                                                                                             |
+| ------- | --------------------------------------------------------------------------------------------------------------------------- |
+| get     | GET /comment/:commentId Gets information about the id,notice_id,user_id,date,descrtiption for comment                       |
+| post    | POST /comment/:commentId Create a new comment Send notice_id,user_id,title,date,descrtiption to request body                |
+| Update  | UPDATE /comment/:commentId Update the comment which match the parameter commentId send id,title,description to request body |
+| Delete  | Delete /comment/:commentId Delete the comment which match the parameter id                                                  |
