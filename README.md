@@ -41,7 +41,7 @@ Within messageBoard.db you will find the following tables.Click the drop-downs b
 ## Endpoints
 
 REST Resource: notice<br/>
-<code>https://url/api/</code><br/>
+<code>https://url/api</code><br/>
 
 | Methods |                                                                                                                   |
 | ------- | ----------------------------------------------------------------------------------------------------------------- |
@@ -53,7 +53,7 @@ REST Resource: notice<br/>
 </br>
 
 REST Resource: comment<br/>
-<code>https://url/api/notice/:noticeId/</code><br/>
+<code>https://url/api/notice/:noticeId</code><br/>
 
 | Methods |                                                                                                                             |
 | ------- | --------------------------------------------------------------------------------------------------------------------------- |
