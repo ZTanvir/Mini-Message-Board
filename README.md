@@ -46,7 +46,8 @@ REST Resource: notice<br/>
 | Methods |                                                                                                                   |
 | ------- | ----------------------------------------------------------------------------------------------------------------- |
 | get     | GET /notice Gets information about the id,user_id,title,date,descrtiption for notice                              |
-| post    | POST /notice Create a new notice Send user_id,title,date,descrtiption to request body                             |
+| get     | GET /notice/:noticeId Gets notice id,user_id,title,date,descrtiption which match the noticeId                     |
+| post    | POST /notice/new Create a new notice Send user_id,title,date,descrtiption to request body                         |
 | Update  | UPDATE /notice/:noticeId Update the notice which match the parameter id send id,title,description to request body |
 | Delete  | Delete /notice/:noticeId Delete the notice which match the parameter id                                           |
 
