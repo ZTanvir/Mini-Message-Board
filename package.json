@@ -1,0 +1,33 @@
+{
+  "name": "mini-message-board",
+  "version": "1.0.0",
+  "description": "User can create,read,update,delete,comment on notice.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZTanvir/Mini-Message-Board.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "Express",
+    "React",
+    "Sqlite3"
+  ],
+  "author": "Zahirul Islam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZTanvir/Mini-Message-Board/issues"
+  },
+  "homepage": "https://github.com/ZTanvir/Mini-Message-Board#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  }
+}
