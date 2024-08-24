@@ -60,6 +60,13 @@ db.serialize(() => {
   const query = `INSERT INTO "notices"("user_id","title","description")
         VALUES(?,?,?);
   `;
+  // db.run(query, [10, "Vacation time", "Dec 10 - january 10"], (err, row) => {
+  //   if (err) {
+  //     logger.error("Item not added");
+  //   } else {
+  //     logger.info("New data added");
+  //   }
+  // });
 });
 
 module.exports = db;
