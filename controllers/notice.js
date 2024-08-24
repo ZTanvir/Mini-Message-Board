@@ -63,7 +63,7 @@ noticeRouter.post("/new", (req, res) => {
           .end();
       }
       row
-        ? res.status(200).json(row)
+        ? res.status(201).json(row)
         : res
             .status(404)
             .json({ error: `Notice ${noticeId} not found` })
@@ -71,8 +71,52 @@ noticeRouter.post("/new", (req, res) => {
     });
   });
 });
+noticeRouter.put("/:noticeId", (req, res) => {
+  const { title, description } = req.body;
+  const { noticeId } = req.params;
 
-noticeRouter.put("/:noticeId", (req, res) => {});
+  db.serialize(() => {
+    const updateTable = `UPDATE notices
+      SET title=?,description=? 
+      WHERE id=?`;
+
+    db.run(
+      updateTable,
+      [String(title), String(description), Number(noticeId)],
+      (err) => {
+        if (err) {
+          res
+            .status(403)
+            .json({
+              error: `Database error ${err.message} on updating notice ${title} `,
+            })
+            .end();
+        }
+        console.log(``);
+      }
+    );
+
+    const getTable = `SELECT * FROM "notices" WHERE "id"=? AND "title" = ? AND "description"=?`;
+    db.all(
+      getTable,
+      [Number(noticeId), String(title), String(description)],
+      (err, row) => {
+        if (err) {
+          res
+            .status(403)
+            .json({ error: `Database error on getting data ${res.message}` })
+            .end();
+        }
+        row
+          ? res.status(201).json(row)
+          : res
+              .status(404)
+              .json({ error: `Notice ${noticeId} not found` })
+              .end();
+      }
+    );
+  });
+});
 noticeRouter.delete("/:noticeId", (req, res) => {});
 
 module.exports = noticeRouter;
