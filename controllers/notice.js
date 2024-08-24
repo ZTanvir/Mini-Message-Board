@@ -92,7 +92,6 @@ noticeRouter.put("/:noticeId", (req, res) => {
             })
             .end();
         }
-        console.log(``);
       }
     );
 
@@ -117,6 +116,49 @@ noticeRouter.put("/:noticeId", (req, res) => {
     );
   });
 });
-noticeRouter.delete("/:noticeId", (req, res) => {});
+noticeRouter.delete("/:noticeId", (req, res) => {
+  const { noticeId } = req.params;
+  db.serialize(() => {
+    const getDatabaseRow = `SELECT * FROM "notices" WHERE "id"=?`;
+    let isNoticeAvailable = false;
+    let tableRow = null;
+
+    db.all(getDatabaseRow, [Number(noticeId)], (err, row) => {
+      if (err) {
+        res
+          .status(403)
+          .json({ error: `Database error on getting data ${res.message}` })
+          .end();
+      }
+      if (!row) {
+        res
+          .status(404)
+          .json({ error: `Notice ${noticeId} not found` })
+          .end();
+      } else if (row) {
+        isNoticeAvailable = true;
+        tableRow = row;
+      }
+    });
+
+    const deleteTable = `DELETE FROM notices WHERE id=?`;
+    db.run(deleteTable, [Number(noticeId)], (err) => {
+      if (err) {
+        res
+          .status(403)
+          .json({
+            error: `Database error ${err.message} on deleting notice id ${noticeId} `,
+          })
+          .end();
+      }
+      !err
+        ? res.status(200).json(tableRow)
+        : res
+            .status(404)
+            .json({ error: `Notice ${noticeId} not found` })
+            .end();
+    });
+  });
+});
 
 module.exports = noticeRouter;
