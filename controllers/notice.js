@@ -1,5 +1,4 @@
 const noticeRouter = require("express").Router();
-const logger = require("../utils/logger");
 const db = require("../models/noticeModel");
 
 noticeRouter.get("/all", (req, res) => {
