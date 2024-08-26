@@ -1,5 +1,5 @@
 const noticeRouter = require("express").Router();
-const db = require("../models/noticeModel");
+const db = require("../models/noticeSchema");
 
 noticeRouter.get("/all", (req, res) => {
   db.serialize(() => {

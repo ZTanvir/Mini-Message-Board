@@ -58,7 +58,7 @@ REST Resource: comment<br/>
 
 | Methods |                                                                                                                             |
 | ------- | --------------------------------------------------------------------------------------------------------------------------- |
-| get     | GET /comment/:commentId Gets information about the id,notice_id,user_id,date,descrtiption for comment                       |
-| post    | POST /comment/:commentId Create a new comment Send notice_id,user_id,title,date,descrtiption to request body                |
+| get     | GET /comment/all Gets information about the id,notice_id,fist_name,last_name,date,descrtiption of the comment               |
+| post    | POST /comment/new Create a new comment,send notice_id,user_id,title,date,descrtiption to request body                       |
 | Update  | UPDATE /comment/:commentId Update the comment which match the parameter commentId send id,title,description to request body |
 | Delete  | Delete /comment/:commentId Delete the comment which match the parameter id                                                  |

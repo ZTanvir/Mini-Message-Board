@@ -47,10 +47,34 @@ db.serialize(() => {
       ? logger.error("Error on creating comments table", err.message)
       : logger.info("Comments table created successfully");
   });
-  const query = `INSERT INTO "notices"("user_id","title","description")
-        VALUES(?,?,?);
+
+  const userCommentView = `CREATE VIEW IF NOT EXISTS user_comment AS
+  SELECT "comments"."id","first_name","last_name","notice_id","date","description"
+  FROM "users" JOIN "comments" ON "users"."id" = "comments"."id";
   `;
-  // db.run(query, [10, "Vacation time", "Dec 10 - january 10"], (err, row) => {
+  db.run(userCommentView, (err) => {
+    if (err) {
+      logger.error("User comment view not created", err.message);
+    } else {
+      logger.info("User comment view created successfull");
+    }
+  });
+
+  // const query = `INSERT INTO "users"("first_name","last_name")
+  //       VALUES(?,?);
+  // `;
+  // db.run(query, ["altaf", "hossen"], (err, row) => {
+  //   if (err) {
+  //     logger.error("Item not added");
+  //   } else {
+  //     logger.info("New data added");
+  //   }
+  // });
+
+  // const query = `INSERT INTO "comments"("user_id","notice_id","description")
+  //       VALUES(?,?,?);
+  // `;
+  // db.run(query, ["altaf", "hossen"], (err, row) => {
   //   if (err) {
   //     logger.error("Item not added");
   //   } else {
