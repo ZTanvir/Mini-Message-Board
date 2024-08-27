@@ -25,6 +25,48 @@ commentRouter.get("/all", (req, res) => {
   });
 });
 
-commentRouter.post("/new", (req, res) => {});
+commentRouter.post("/new", (req, res) => {
+  // get userId,noticeId,description
+  const { noticeId } = req.params;
+  const { userId, description } = req.body;
+
+  db.serialize(() => {
+    const createCommentQuery = `
+      INSERT INTO 
+        comments ("user_id","notice_id","description")
+        VALUES(?,?,?);`;
+
+    db.run(
+      createCommentQuery,
+      [Number(userId), Number(noticeId), description],
+      function (err) {
+        if (err) {
+          logger.error(`Error when adding comment to db`, err);
+          return res
+            .status(500)
+            .json({ error: "Database error, check dev console" });
+        }
+
+        // when new comment create successfully
+        const getComment = `SELECT * FROM "user_comment" WHERE "id" = ?;`;
+        const commentId = this.lastID;
+
+        db.all(getComment, [commentId], (err, row) => {
+          if (err) {
+            return res
+              .status(500)
+              .json({ error: "Database error, check dev console" });
+          }
+          // if database contain comments
+          if (row.length > 0) {
+            return res.status(200).json(row);
+          } else if (row.length === 0) {
+            return res.status(200).json({ message: "no comments" });
+          }
+        });
+      }
+    );
+  });
+});
 
 module.exports = commentRouter;

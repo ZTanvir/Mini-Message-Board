@@ -50,7 +50,7 @@ db.serialize(() => {
 
   const userCommentView = `CREATE VIEW IF NOT EXISTS user_comment AS
   SELECT "comments"."id","first_name","last_name","notice_id","date","description"
-  FROM "users" JOIN "comments" ON "users"."id" = "comments"."id";
+  FROM "users" JOIN "comments" ON "users"."id" = "comments"."user_id";
   `;
   db.run(userCommentView, (err) => {
     if (err) {
