@@ -54,9 +54,9 @@ db.serialize(() => {
   `;
   db.run(userCommentView, (err) => {
     if (err) {
-      logger.error("User comment view not created", err.message);
+      logger.error("user_comment view not created", err.message);
     } else {
-      logger.info("User comment view created successfull");
+      logger.info("user_comment view created successfull");
     }
   });
 

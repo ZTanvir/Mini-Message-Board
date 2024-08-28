@@ -69,4 +69,36 @@ commentRouter.post("/new", (req, res) => {
   });
 });
 
+commentRouter.delete("/:commentId", (req, res) => {
+  const { commentId } = req.params;
+
+  db.serialize(() => {
+    const getCommentQuery = `SELECT * FROM "comments" 
+      WHERE "id"=?`;
+
+    db.get(getCommentQuery, [Number(commentId)], (err, row) => {
+      if (err) {
+        return res
+          .status(500)
+          .json({ error: "database error check dev console" });
+      }
+      // is comment in the db
+      if (!row) {
+        // comment not found
+        return res.status(404).json({ message: "Comment not found" });
+      }
+      // comment found
+      const deleteTableQuery = `DELETE FROM "comments" WHERE "id"=?;`;
+      db.run(deleteTableQuery, [Number(commentId)], (err) => {
+        if (err) {
+          return res
+            .status(500)
+            .json({ error: "database error check dev console" });
+        }
+        return res.status(200).json(row);
+      });
+    });
+  });
+});
+
 module.exports = commentRouter;
