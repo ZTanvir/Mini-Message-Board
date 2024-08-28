@@ -69,6 +69,8 @@ commentRouter.post("/new", (req, res) => {
   });
 });
 
+commentRouter.put("/:commentId", (req, res) => {});
+
 commentRouter.delete("/:commentId", (req, res) => {
   const { commentId } = req.params;
 

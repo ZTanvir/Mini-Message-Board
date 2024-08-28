@@ -25,7 +25,7 @@ Within messageBoard.db you will find the following tables.Click the drop-downs b
     <code>user_id</code> which is the id of the user who created the notice <br/>
     <code>title</code> which is the title of the notice <br/>
     <code>date</code> which is the date when the notice created<br/>
-    <code>description</code> which is the description of the notice <br/>
+    <code>notice</code> which is the description of the notice <br/>
 </details>
 
 <details>
@@ -35,7 +35,8 @@ Within messageBoard.db you will find the following tables.Click the drop-downs b
     <code>notice_id</code> which is the id of the notice where user comments<br/>
     <code>user_id</code> which is the id of the user who comment on the notice<br/>
     <code>date</code> which is the date of the comment<br/>
-    <code>description</code> which is the descriptions of the comment<br/>
+    <code>comment</code> which is the comment user made<br/>
+    <code>old_comment</code> which is the old comment which had been edited <br/>
 </details>
 
 ## Endpoints
@@ -43,22 +44,22 @@ Within messageBoard.db you will find the following tables.Click the drop-downs b
 REST Resource: notice<br/>
 <code>https://url/api</code><br/>
 
-| Methods |                                                                                                                   |
-| ------- | ----------------------------------------------------------------------------------------------------------------- |
-| get     | GET /notice/all Gets information about the id,user_id,title,date,descrtiption for notice                          |
-| get     | GET /notice/:noticeId Gets notice id,user_id,title,date,descrtiption which match the noticeId                     |
-| post    | POST /notice/new Create a new notice Send user_id,title,date,descrtiption to request body                         |
-| Update  | UPDATE /notice/:noticeId Update the notice which match the parameter id send id,title,description to request body |
-| Delete  | Delete /notice/:noticeId Delete the notice which match the parameter id                                           |
+| Methods |                                                                                                                |
+| ------- | -------------------------------------------------------------------------------------------------------------- |
+| get     | GET /notice/all Gets information about the id,user_id,title,date,descrtiption for notice                       |
+| get     | GET /notice/:noticeId Gets notice id,user_id,title,date,descrtiption which match the noticeId                  |
+| post    | POST /notice/new Create a new notice Send user_id,title,date,descrtiption to request body                      |
+| Update  | Put /notice/:noticeId Update the notice which match the parameter id send id,title,description to request body |
+| Delete  | Delete /notice/:noticeId Delete the notice which match the parameter id                                        |
 
 </br>
 
 REST Resource: comment<br/>
 <code>https://url/api/notice/:noticeId</code><br/>
 
-| Methods |                                                                                                                             |
-| ------- | --------------------------------------------------------------------------------------------------------------------------- |
-| get     | GET /comment/all Gets information about the id,notice_id,fist_name,last_name,date,descrtiption of the comment               |
-| post    | POST /comment/new Create a new comment,send notice_id,user_id,title,date,descrtiption to request body                       |
-| Update  | UPDATE /comment/:commentId Update the comment which match the parameter commentId send id,title,description to request body |
-| Delete  | Delete /comment/:commentId Delete the comment which match the parameter id                                                  |
+| Methods |                                                                                                                          |
+| ------- | ------------------------------------------------------------------------------------------------------------------------ |
+| get     | GET /comment/all Gets information about the id,notice_id,fist_name,last_name,date,descrtiption of the comment            |
+| post    | POST /comment/new Create a new comment,send notice_id,user_id,title,date,descrtiption to request body                    |
+| Update  | PUT /comment/:commentId Update the comment which match the parameter commentId send id,title,description to request body |
+| Delete  | Delete /comment/:commentId Delete the comment which match the parameter id                                               |

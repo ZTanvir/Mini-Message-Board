@@ -19,7 +19,7 @@ db.serialize(() => {
         "id" INTEGER,
         "user_id" INTEGER NOT NULL,
         "title" TEXT NOT NULL,
-        "description" TEXT,
+        "notice" TEXT,
         "date" DEFAULT CURRENT_DATE,
         PRIMARY KEY ("id"),
         FOREIGN KEY ("user_id") REFERENCES "users"("id")
@@ -36,7 +36,8 @@ db.serialize(() => {
         "user_id" INTEGER NOT NULL,
         "notice_id" INTEGER NOT NULL,
         "date" DEFAULT CURRENT_DATE,
-        "description" TEXT,
+        "comment" TEXT,
+        "old_comment" TEXT,
         PRIMARY KEY ("id"),
         FOREIGN KEY ("user_id") REFERENCES "users"("id"),
         FOREIGN KEY ("notice_id") REFERENCES "notices"("id")
@@ -49,7 +50,7 @@ db.serialize(() => {
   });
 
   const userCommentView = `CREATE VIEW IF NOT EXISTS user_comment AS
-  SELECT "comments"."id","first_name","last_name","notice_id","date","description"
+  SELECT "comments"."id","first_name","last_name","notice_id","date","comment","old_comment"
   FROM "users" JOIN "comments" ON "users"."id" = "comments"."user_id";
   `;
   db.run(userCommentView, (err) => {
@@ -81,6 +82,11 @@ db.serialize(() => {
   //     logger.info("New data added");
   //   }
   // });
+  // copy table to comment
+  // alter table add column old_comment with default 0
+  // delete comments table
+  // new table with update schema
+  // insert data from comment table to comments table
 });
 
 module.exports = db;
