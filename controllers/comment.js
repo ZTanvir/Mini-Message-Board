@@ -28,17 +28,17 @@ commentRouter.get("/all", (req, res) => {
 commentRouter.post("/new", (req, res) => {
   // get userId,noticeId,description
   const { noticeId } = req.params;
-  const { userId, description } = req.body;
+  const { userId, comment } = req.body;
 
   db.serialize(() => {
     const createCommentQuery = `
       INSERT INTO 
-        comments ("user_id","notice_id","description")
+        comments ("user_id","notice_id","comment")
         VALUES(?,?,?);`;
 
     db.run(
       createCommentQuery,
-      [Number(userId), Number(noticeId), description],
+      [Number(userId), Number(noticeId), comment],
       function (err) {
         if (err) {
           logger.error(`Error when adding comment to db`, err);
@@ -58,18 +58,20 @@ commentRouter.post("/new", (req, res) => {
               .json({ error: "Database error, check dev console" });
           }
           // if database contain comments
-          if (row.length > 0) {
-            return res.status(200).json(row);
-          } else if (row.length === 0) {
+          if (!row) {
             return res.status(200).json({ message: "no comments" });
           }
+          return res.status(200).json(row);
         });
       }
     );
   });
 });
 
-commentRouter.put("/:commentId", (req, res) => {});
+commentRouter.put("/:commentId", (req, res) => {
+  const { noticeId, commentId } = req.params;
+  const { user_id, comment } = req.body;
+});
 
 commentRouter.delete("/:commentId", (req, res) => {
   const { noticeId, commentId } = req.params;

@@ -3,5 +3,5 @@ Content-Type: application/json
 
 {
     "userId":"1",
-    "description":"I have job I can't get on time"
+    "comment":"Last comment"
 }
