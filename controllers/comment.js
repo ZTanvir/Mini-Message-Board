@@ -17,11 +17,10 @@ commentRouter.get("/all", (req, res) => {
         .json({ error: "Database error check dev console" });
     }
     // if database contain comments
-    if (row.length > 0) {
-      return res.status(200).json(row);
-    } else if (row.length === 0) {
+    if (row.length === 0) {
       return res.status(200).json({ message: "no comments" });
     }
+    return res.status(200).json(row);
   });
 });
 
@@ -50,7 +49,6 @@ commentRouter.post("/new", (req, res) => {
         // when new comment create successfully
         const getComment = `SELECT * FROM "user_comment" WHERE "id" = ?;`;
         const commentId = this.lastID;
-
         db.all(getComment, [commentId], (err, row) => {
           if (err) {
             return res
@@ -58,7 +56,7 @@ commentRouter.post("/new", (req, res) => {
               .json({ error: "Database error, check dev console" });
           }
           // if database contain comments
-          if (!row) {
+          if (row.length === 0) {
             return res.status(200).json({ message: "no comments" });
           }
           return res.status(200).json(row);
@@ -70,7 +68,48 @@ commentRouter.post("/new", (req, res) => {
 
 commentRouter.put("/:commentId", (req, res) => {
   const { noticeId, commentId } = req.params;
-  const { user_id, comment } = req.body;
+  const { userId, comment } = req.body;
+
+  db.serialize(() => {
+    // update comment
+    const updateTableQuery = `UPDATE "comments"
+    SET "comment" = ?,
+    "old_comment" = (SELECT "comment" FROM "comments" WHERE "id"=?)
+    WHERE "id"= ? AND "user_id"= ? AND "notice_id" = ?;
+  `;
+    db.run(
+      updateTableQuery,
+      [
+        String(comment),
+        Number(commentId),
+        Number(commentId),
+        Number(userId),
+        Number(noticeId),
+      ],
+      function (err) {
+        if (err) {
+          return res.status(500).json({
+            error: "Database error on update comment check dev console",
+          });
+        }
+      }
+    );
+    // get the updated comment
+    const getCommentQuery = `SELECT * FROM "user_comment" WHERE "id" = ?;`;
+    db.all(getCommentQuery, [Number(commentId)], (err, row) => {
+      if (err) {
+        return res
+          .status(500)
+          .json({ error: "Database error, check dev console" });
+      }
+      // if database contain comments
+      console.log("row:", row.length === 0);
+      if (row.length === 0) {
+        return res.status(200).json({ message: "no comments" });
+      }
+      return res.status(200).json(row);
+    });
+  });
 });
 
 commentRouter.delete("/:commentId", (req, res) => {
@@ -90,7 +129,7 @@ commentRouter.delete("/:commentId", (req, res) => {
             .json({ error: "database error check dev console" });
         }
         // is comment in the db
-        if (!row) {
+        if (row.length === 0) {
           // comment not found
           return res.status(404).json({ message: "Comment not found" });
         }
