@@ -103,7 +103,6 @@ commentRouter.put("/:commentId", (req, res) => {
           .json({ error: "Database error, check dev console" });
       }
       // if database contain comments
-      console.log("row:", row.length === 0);
       if (row.length === 0) {
         return res.status(200).json({ message: "no comments" });
       }
