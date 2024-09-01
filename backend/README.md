@@ -46,7 +46,7 @@ REST Resource: notice<br/>
 
 | Methods |                                                                                                                |
 | ------- | -------------------------------------------------------------------------------------------------------------- |
-| get     | GET /notice/all Gets information about the id,firstname,lastname,title,date,descrtiption for notice            |
+| get     | GET /notice/all Gets information about the id,first_name,last_name,title,date,descrtiption for notice          |
 | get     | GET /notice/:noticeId Gets notice id,user_id,title,date,descrtiption which match the noticeId                  |
 | post    | POST /notice/new Create a new notice Send user_id,title,date,descrtiption to request body                      |
 | Update  | Put /notice/:noticeId Update the notice which match the parameter id send id,title,description to request body |
@@ -59,7 +59,7 @@ REST Resource: comment<br/>
 
 | Methods |                                                                                                                          |
 | ------- | ------------------------------------------------------------------------------------------------------------------------ |
-| get     | GET /comment/all Gets information about the id,notice_id,fist_name,last_name,date,descrtiption of the comment            |
+| get     | GET /comment/all Gets information about the id,notice_id,first_name,last_name,date,descrtiption of the comment           |
 | post    | POST /comment/new Create a new comment,send notice_id,user_id,title,date,descrtiption to request body                    |
 | Update  | PUT /comment/:commentId Update the comment which match the parameter commentId send id,title,description to request body |
 | Delete  | Delete /comment/:commentId Delete the comment which match the parameter id                                               |
