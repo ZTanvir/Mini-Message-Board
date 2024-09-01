@@ -3,7 +3,7 @@ const db = require("../models/noticeSchema");
 
 noticeRouter.get("/all", (req, res) => {
   db.serialize(() => {
-    const getNotices = `SELECT * FROM "notices";`;
+    const getNotices = `SELECT * FROM "user_notices";`;
 
     db.all(getNotices, [], (err, row) => {
       if (err) {

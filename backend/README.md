@@ -22,10 +22,10 @@ Within messageBoard.db you will find the following tables.Click the drop-downs b
     <summary><code>notices</code> table</summary>
     <code>notices</code> table contains the following columns <br/>
     <code>id</code> which is the id of the notice <br/>
-    <code>user_id</code> which is the id of the user who created the notice <br/>
-    <code>title</code> which is the title of the notice <br/>
+    <code>user_id</code> which is the id of the user who created the notice <br/>    
+    <code>title</code> which is the description of the notice <br/>
+    <code>description</code> which is the description of the notice <br/>
     <code>date</code> which is the date when the notice created<br/>
-    <code>notice</code> which is the description of the notice <br/>
 </details>
 
 <details>
@@ -46,7 +46,7 @@ REST Resource: notice<br/>
 
 | Methods |                                                                                                                |
 | ------- | -------------------------------------------------------------------------------------------------------------- |
-| get     | GET /notice/all Gets information about the id,user_id,title,date,descrtiption for notice                       |
+| get     | GET /notice/all Gets information about the id,firstname,lastname,title,date,descrtiption for notice            |
 | get     | GET /notice/:noticeId Gets notice id,user_id,title,date,descrtiption which match the noticeId                  |
 | post    | POST /notice/new Create a new notice Send user_id,title,date,descrtiption to request body                      |
 | Update  | Put /notice/:noticeId Update the notice which match the parameter id send id,title,description to request body |

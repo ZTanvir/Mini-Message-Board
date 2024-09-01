@@ -18,8 +18,8 @@ db.serialize(() => {
   let createNoticeTable = `CREATE TABLE IF NOT EXISTS "notices"(
         "id" INTEGER,
         "user_id" INTEGER NOT NULL,
-        "title" TEXT NOT NULL,
-        "notice" TEXT,
+        "notice" TEXT NOT NULL,
+        "description" TEXT,
         "date" DEFAULT CURRENT_DATE,
         PRIMARY KEY ("id"),
         FOREIGN KEY ("user_id") REFERENCES "users"("id")
@@ -61,6 +61,17 @@ db.serialize(() => {
     }
   });
 
+  const userNoticeViewQuery = `CREATE VIEW IF NOT EXISTS user_notices AS
+    SELECT "notices"."id","first_name","last_name","notice","description","date"
+    FROM "notices" JOIN "users" ON "notices"."user_id"="users"."id";
+  `;
+  db.run(userNoticeViewQuery, (err) => {
+    if (err) {
+      logger.error("user_notices view not created", err.message);
+    } else {
+      logger.info("user_notices view created successfull");
+    }
+  });
   // const query = `INSERT INTO "users"("first_name","last_name")
   //       VALUES(?,?);
   // `;
