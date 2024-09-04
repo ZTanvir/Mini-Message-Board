@@ -20,7 +20,7 @@ db.serialize(() => {
         "user_id" INTEGER NOT NULL,
         "notice" TEXT NOT NULL,
         "description" TEXT,
-        "date" DEFAULT CURRENT_TIMESTAMP,
+        "date" DEFAULT (DATETIME(CURRENT_TIMESTAMP,'LOCALTIME')),
         PRIMARY KEY ("id"),
         FOREIGN KEY ("user_id") REFERENCES "users"("id")
     );`;
@@ -35,7 +35,7 @@ db.serialize(() => {
         "id" INTEGER,
         "user_id" INTEGER NOT NULL,
         "notice_id" INTEGER NOT NULL,
-        "date" DEFAULT CURRENT_TIMESTAMP,
+        "date" DEFAULT (DATETIME(CURRENT_TIMESTAMP,'LOCALTIME')),
         "comment" TEXT,
         "old_comment" TEXT,
         PRIMARY KEY ("id"),
