@@ -32,16 +32,16 @@ noticeRouter.get("/:noticeId", (req, res) => {
   });
 });
 noticeRouter.post("/new", (req, res) => {
-  const { user_id, title, description } = req.body;
+  const { user_id, notice, description } = req.body;
 
   db.serialize(() => {
-    const insertTable = `INSERT INTO "notices" ("user_id","title","description")
+    const insertTable = `INSERT INTO "notices" ("user_id","notice","description")
     VALUES(?,?,?)
   `;
 
     db.run(
       insertTable,
-      [Number(user_id), String(title), String(description)],
+      [Number(user_id), String(notice), String(description)],
       (err) => {
         if (err) {
           console.log(err);
@@ -53,8 +53,8 @@ noticeRouter.post("/new", (req, res) => {
       }
     );
 
-    const getTable = `SELECT * FROM "notices" WHERE "title" = ? AND "description"=?`;
-    db.all(getTable, [String(title), String(description)], (err, row) => {
+    const getTable = `SELECT * FROM "notices" WHERE "notice" = ? AND "description"=?`;
+    db.all(getTable, [String(notice), String(description)], (err, row) => {
       if (err) {
         res
           .status(403)
@@ -65,18 +65,18 @@ noticeRouter.post("/new", (req, res) => {
         ? res.status(201).json(row)
         : res
             .status(404)
-            .json({ error: `Notice ${noticeId} not found` })
+            .json({ error: `Notice ${notice} not found` })
             .end();
     });
   });
 });
 noticeRouter.put("/:noticeId", (req, res) => {
-  const { title, description } = req.body;
+  const { notice, description } = req.body;
   const { noticeId } = req.params;
 
   db.serialize(() => {
     const updateTable = `UPDATE notices
-      SET title=?,description=? 
+      SET notice=?,description=? 
       WHERE id=?`;
 
     db.run(
@@ -94,10 +94,10 @@ noticeRouter.put("/:noticeId", (req, res) => {
       }
     );
 
-    const getTable = `SELECT * FROM "notices" WHERE "id"=? AND "title" = ? AND "description"=?`;
+    const getTable = `SELECT * FROM "notices" WHERE "id"=? AND "notice" = ? AND "description"=?`;
     db.all(
       getTable,
-      [Number(noticeId), String(title), String(description)],
+      [Number(noticeId), String(notice), String(description)],
       (err, row) => {
         if (err) {
           res
@@ -119,7 +119,6 @@ noticeRouter.delete("/:noticeId", (req, res) => {
   const { noticeId } = req.params;
   db.serialize(() => {
     const getDatabaseRow = `SELECT * FROM "notices" WHERE "id"=?`;
-    let isNoticeAvailable = false;
     let tableRow = null;
 
     db.all(getDatabaseRow, [Number(noticeId)], (err, row) => {

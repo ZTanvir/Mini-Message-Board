@@ -1,9 +1,8 @@
 const UserName = ({ name }) => {
-  const fullName = name;
   return (
-    <p>
+    <p className="fullName">
       <span className="material-symbols-outlined">person</span>{" "}
-      <span>{fullName}</span>
+      <span>{name}</span>
     </p>
   );
 };
