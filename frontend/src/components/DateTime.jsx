@@ -45,7 +45,7 @@ const DateTime = ({ showIcon, date, time }) => {
         <span className="material-symbols-outlined">calendar_month</span>
       )}
       {date && <span>{formateDate(date)}</span>}
-      {time && <li className="roundList"></li>}
+      {time && <span className={styles.roundBall}></span>}
       {time && <span>{formateTime(date)}</span>}
     </p>
   );
