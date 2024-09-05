@@ -25,8 +25,6 @@ const DateTime = ({ showIcon, date, time }) => {
   };
 
   const formateTime = (dateTime = "") => {
-    console.log(dateTime);
-
     // "YYYY-MM-DD HH:MM:SS"
     let hourMinuteSecond = dateTime.split(" ")[1];
     //  04:20 PM

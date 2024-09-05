@@ -1,0 +1,29 @@
+.noticeDetailsContainer {
+}
+.titleIconContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.noticeTitle {
+  order: 1;
+}
+.noticeTitleIcon {
+  width: 3rem;
+  height: 3rem;
+  background-color: #f3ebff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  order: 0;
+}
+.nameDateContainer {
+  display: flex;
+  gap: 1rem;
+}
+.horizontalLine {
+  width: 100%;
+  height: 2px;
+  background-color: rgb(240, 236, 236);
+}
