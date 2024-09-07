@@ -1,5 +1,6 @@
 import DateTime from "../DateTime";
 import UserName from "../Username";
+import Comments from "../Comments";
 import styles from "../../styles/noticeDetails.module.css";
 
 const NoticeDetails = ({
@@ -11,6 +12,7 @@ const NoticeDetails = ({
   date,
 }) => {
   const fullName = first_name + " " + last_name;
+  const noticeId = id;
 
   return (
     <div className={styles.noticeDetailsContainer}>
@@ -32,6 +34,9 @@ const NoticeDetails = ({
           <h3>Notice Details</h3>
           <p>{description}</p>
         </main>
+      </section>
+      <section>
+        <Comments noticeId={noticeId} />
       </section>
     </div>
   );

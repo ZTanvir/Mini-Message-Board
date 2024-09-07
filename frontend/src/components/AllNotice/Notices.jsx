@@ -10,8 +10,6 @@ const Notices = ({}) => {
   const handleNotice = (e) => {
     const noticeId = Number(e.currentTarget.dataset.noticeid);
     const getNoticeDetails = notices.filter((notice) => notice.id === noticeId);
-    console.log(getNoticeDetails);
-
     setNoticeDetails(getNoticeDetails[0]);
   };
 
