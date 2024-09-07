@@ -1,10 +1,21 @@
 import { useEffect, useState } from "react";
 import Comment from "./Comment";
+import CommentService from "../services/comments";
 
 const Comments = ({ noticeId }) => {
   const [comments, setComments] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    async function getCommentsData(noticeId = noticeId) {
+      try {
+        const data = await CommentService.getComments(noticeId);
+        setComments([...data]);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getCommentsData(noticeId);
+  }, []);
 
   return (
     <>

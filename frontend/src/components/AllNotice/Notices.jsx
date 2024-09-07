@@ -15,12 +15,16 @@ const Notices = ({}) => {
 
   useEffect(() => {
     const getNotices = async () => {
-      const data = await NoticesService.getAll();
-      setNotices([...data]);
-      return data;
+      try {
+        const data = await NoticesService.getAll();
+        setNotices([...data]);
+      } catch (error) {
+        console.error(error);
+      }
     };
     getNotices();
   }, []);
+
   return (
     <>
       <h1>Notice board</h1>

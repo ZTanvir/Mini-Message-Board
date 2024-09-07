@@ -10,7 +10,7 @@ const Comment = ({
   oldComment,
 }) => {
   const fullName = firstName + " " + lastName;
-  console.log(oldComment);
+  console.log({ oldComment });
 
   return (
     <>
