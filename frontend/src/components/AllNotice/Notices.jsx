@@ -28,6 +28,7 @@ const Notices = ({}) => {
   return (
     <>
       <h1>Notice board</h1>
+      <button>Add Notice</button>
       {Boolean(notices.length > 0)
         ? notices.map((notice) => (
             <Notice

@@ -24,6 +24,8 @@ const Comments = ({ noticeId }) => {
         ? comments.map((comment) => (
             <Comment
               key={comment.id}
+              noticeId={noticeId}
+              commentId={comment.id}
               firstName={comment.first_name}
               lastName={comment.last_name}
               date={comment.date}

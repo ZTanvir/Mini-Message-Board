@@ -2,6 +2,7 @@ import UserName from "./Username";
 import DateTime from "./DateTime";
 
 const Comment = ({
+  noticeId,
   commentId,
   firstName,
   lastName,
@@ -10,7 +11,7 @@ const Comment = ({
   oldComment,
 }) => {
   const fullName = firstName + " " + lastName;
-  console.log({ oldComment });
+  const lastComment = oldComment;
 
   return (
     <>
@@ -25,11 +26,17 @@ const Comment = ({
           </div>
         </header>
         <main>
-          <p>{comment}</p>
           <p>
             <span>edited</span>
           </p>
+          <div>
+            <p>{comment}</p>
+            <span>edit</span>
+          </div>
         </main>
+        <footer>
+          
+        </footer>
       </div>
     </>
   );
