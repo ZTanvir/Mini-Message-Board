@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Notice from "./Notice";
 import NoticeDetails from "./NoticeDetails";
 import NoticesService from "../../services/notices";
+import ToggleElement from "../ToggleElement";
 
 const Notices = ({}) => {
   const [notices, setNotices] = useState([]);
@@ -28,7 +29,7 @@ const Notices = ({}) => {
   return (
     <>
       <h1>Notice board</h1>
-      <button>Add Notice</button>
+      <ToggleElement btnText={"Add Notice"}></ToggleElement>
       {Boolean(notices.length > 0)
         ? notices.map((notice) => (
             <Notice
