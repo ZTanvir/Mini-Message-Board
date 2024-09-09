@@ -12,7 +12,7 @@ const ToggleElement = ({ children, btnText }) => {
       <button onClick={handleToggleElement}>
         {isOpen ? "close" : btnText}
       </button>
-      {children}
+      {isOpen ? children : null}
     </div>
   );
 };
