@@ -3,6 +3,8 @@ import Notice from "./Notice";
 import NoticeDetails from "./NoticeDetails";
 import NoticesService from "../../services/notices";
 import ToggleElement from "../ToggleElement";
+import FormField from "../Form/FormField";
+import NoticeFromData from "../Form/NoticeFormData";
 
 const Notices = ({}) => {
   const [notices, setNotices] = useState([]);
@@ -11,8 +13,11 @@ const Notices = ({}) => {
   const handleNotice = (e) => {
     const noticeId = Number(e.currentTarget.dataset.noticeid);
     const getNoticeDetails = notices.filter((notice) => notice.id === noticeId);
-    setNoticeDetails(getNoticeDetails[0]);
+    const noticeData = getNoticeDetails.length > 0 ? getNoticeDetails[0] : "";
+    setNoticeDetails(noticeData);
   };
+
+  const handleAddNewNotice = (e) => {};
 
   useEffect(() => {
     const getNotices = async () => {
@@ -29,7 +34,13 @@ const Notices = ({}) => {
   return (
     <>
       <h1>Notice board</h1>
-      <ToggleElement btnText={"Add Notice"}></ToggleElement>
+      <ToggleElement btnText={"Add Notice"}>
+        <FormField
+          handleForm={handleAddNewNotice}
+          formName={"addNotice"}
+          formData={NoticeFromData}
+        />
+      </ToggleElement>
       {Boolean(notices.length > 0)
         ? notices.map((notice) => (
             <Notice
