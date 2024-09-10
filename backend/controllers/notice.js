@@ -14,7 +14,7 @@ noticeRouter.get("/all", (req, res) => {
   });
 });
 noticeRouter.get("/:noticeId", (req, res) => {
-  const query = `SELECT * FROM "notices" WHERE "id" = ?`;
+  const query = `SELECT * FROM "user_notices" WHERE "id" = ?`;
   const { noticeId } = req.params;
   db.get(query, [Number(noticeId)], (err, row) => {
     if (err) {
@@ -53,7 +53,7 @@ noticeRouter.post("/new", (req, res) => {
       }
     );
 
-    const getTable = `SELECT * FROM "notices" WHERE "notice" = ? AND "description"=?`;
+    const getTable = `SELECT * FROM "user_notices" WHERE "notice" = ? AND "description"=?`;
     db.all(getTable, [String(notice), String(description)], (err, row) => {
       if (err) {
         res

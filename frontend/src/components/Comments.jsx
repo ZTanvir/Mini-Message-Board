@@ -9,7 +9,9 @@ const Comments = ({ noticeId }) => {
     async function getCommentsData(noticeId = noticeId) {
       try {
         const data = await CommentService.getComments(noticeId);
-        setComments([...data]);
+        if (data === "no comments") {
+          setComments([...data]);
+        }
       } catch (error) {
         console.error(error);
       }

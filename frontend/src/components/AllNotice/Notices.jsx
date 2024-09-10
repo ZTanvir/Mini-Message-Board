@@ -4,7 +4,7 @@ import NoticeDetails from "./NoticeDetails";
 import NoticesService from "../../services/notices";
 import ToggleElement from "../ToggleElement";
 import FormField from "../Form/FormField";
-import NoticeFromData from "../Form/NoticeFormData";
+import NoticeFormData from "../Form/NoticeFormData";
 
 const Notices = ({}) => {
   const [notices, setNotices] = useState([]);
@@ -23,7 +23,21 @@ const Notices = ({}) => {
 
   const handleAddNewNotice = (e) => {
     e.preventDefault();
-    console.log(formValues);
+    async function addNewNotice() {
+      const { noticeTitle, noticeDescription } = formValues;
+      try {
+        const newNoticeData = await NoticesService.addNotice(
+          1,
+          noticeTitle,
+          noticeDescription
+        );
+        setNotices([...notices, newNoticeData[0]]);
+        console.log(newNoticeData);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    addNewNotice();
     // reset add notice form
     setFormValues({ noticeTitle: "", noticeDescription: "" });
   };
@@ -45,7 +59,7 @@ const Notices = ({}) => {
       <h1>Notice board</h1>
       <ToggleElement btnText={"Add Notice"}>
         <FormField
-          formData={NoticeFromData}
+          formData={NoticeFormData}
           formName={"addNotice"}
           formValues={formValues}
           setFormValues={setFormValues}
