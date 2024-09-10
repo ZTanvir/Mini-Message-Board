@@ -10,9 +10,8 @@ const InputElements = ({
   onChangeValue,
   rows,
   cols,
-  textAreaText,
 }) => {
-  const inputId = useId;
+  const inputId = useId();
   const fieldId = `${inputId}-${name}`;
 
   return (
@@ -20,23 +19,22 @@ const InputElements = ({
       <label htmlFor={fieldId}>{labelText}</label>
       {type === "textarea" ? (
         <textarea
-          value={value}
-          onChange={onChangeValue}
           id={fieldId}
           name={name}
           rows={rows}
           cols={cols}
+          value={value}
+          onChange={onChangeValue}
           required={isRequired}
-        >
-          {textAreaText}
-        </textarea>
+        ></textarea>
       ) : (
         <input
+          id={fieldId}
           type={type}
           placeholder={placeHolder}
           name={name}
           value={value}
-          onChangeValue={onChangeValue}
+          onChange={onChangeValue}
           required={isRequired}
         />
       )}

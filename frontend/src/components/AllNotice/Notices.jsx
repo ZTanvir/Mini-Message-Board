@@ -9,6 +9,10 @@ import NoticeFromData from "../Form/NoticeFormData";
 const Notices = ({}) => {
   const [notices, setNotices] = useState([]);
   const [noticeDetails, setNoticeDetails] = useState("");
+  const [formValues, setFormValues] = useState({
+    noticeTitle: "",
+    noticeDescription: "",
+  });
 
   const handleNotice = (e) => {
     const noticeId = Number(e.currentTarget.dataset.noticeid);
@@ -17,7 +21,12 @@ const Notices = ({}) => {
     setNoticeDetails(noticeData);
   };
 
-  const handleAddNewNotice = (e) => {};
+  const handleAddNewNotice = (e) => {
+    e.preventDefault();
+    console.log(formValues);
+    // reset add notice form
+    setFormValues({ noticeTitle: "", noticeDescription: "" });
+  };
 
   useEffect(() => {
     const getNotices = async () => {
@@ -36,9 +45,11 @@ const Notices = ({}) => {
       <h1>Notice board</h1>
       <ToggleElement btnText={"Add Notice"}>
         <FormField
-          handleForm={handleAddNewNotice}
-          formName={"addNotice"}
           formData={NoticeFromData}
+          formName={"addNotice"}
+          formValues={formValues}
+          setFormValues={setFormValues}
+          handleSubmitFrom={handleAddNewNotice}
         />
       </ToggleElement>
       {Boolean(notices.length > 0)
