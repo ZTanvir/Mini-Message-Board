@@ -1,0 +1,50 @@
+.editDeleteContainer {
+  width: 150px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.25rem;
+  order: 1;
+  border-radius: 6px;
+  position: relative;
+  z-index: 2;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  padding: 0.25rem 0rem;
+}
+.boxArrow {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 40%;
+  margin-left: -10px;
+  transform: rotate(45deg);
+  box-shadow: rgba(6, 24, 44, 0) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  z-index: -1;
+}
+:is(.editDeleteContainer, .boxArrow) {
+  background-color: white;
+}
+
+:is(.deleteBtn, .editBtn) {
+  padding: 0.75rem;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background-color: white;
+}
+
+:is(.deleteBtn > span, .editBtn > span) {
+  font-size: 1.3rem;
+}
+.deleteBtn:hover,
+.editBtn:hover {
+  background-color: rgb(241, 241, 241);
+}

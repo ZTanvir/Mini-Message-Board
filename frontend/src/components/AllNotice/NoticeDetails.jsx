@@ -1,7 +1,9 @@
 import DateTime from "../DateTime";
 import UserName from "../Username";
 import Comments from "../Comments";
+import EditDelete from "../EditDelete";
 import styles from "../../styles/noticeDetails.module.css";
+import { useState } from "react";
 
 const NoticeDetails = ({
   id,
@@ -11,15 +13,38 @@ const NoticeDetails = ({
   description,
   date,
 }) => {
+  const [isEditDeleteVisiable, setIsEditDeleteVisiable] = useState(false);
   const fullName = first_name + " " + last_name;
   const noticeId = id;
+
+  const handleEditNotice = () => {
+    // toggle EditDelete component
+    setIsEditDeleteVisiable(!isEditDeleteVisiable);
+  };
+
+  const handleEditBtn = () => {};
+  const handleDeleteBtn = () => {};
 
   return (
     <div className={styles.noticeDetailsContainer}>
       <section data-noticeid={id}>
         <header>
           <div className={styles.titleIconContainer}>
-            <h2 className={styles.noticeTitle}>{notice}</h2>
+            <h2 className={styles.noticeTitle}>
+              {notice}
+              <span
+                onClick={handleEditNotice}
+                className="material-symbols-outlined"
+              >
+                more_horiz
+              </span>
+            </h2>
+            {isEditDeleteVisiable && (
+              <EditDelete
+                handleEditBtn={handleEditBtn}
+                handleDeleteBtn={handleDeleteBtn}
+              />
+            )}
             <div className={styles.noticeTitleIcon}>
               <span className="material-symbols-outlined">campaign</span>
             </div>

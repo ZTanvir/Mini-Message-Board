@@ -32,7 +32,6 @@ const Notices = ({}) => {
           noticeDescription
         );
         setNotices([...notices, newNoticeData[0]]);
-        console.log(newNoticeData);
       } catch (error) {
         console.error(error);
       }
