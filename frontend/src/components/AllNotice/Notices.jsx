@@ -86,6 +86,8 @@ const Notices = ({}) => {
           notice={noticeDetails.notice}
           description={noticeDetails.description}
           date={noticeDetails.date}
+          notices={notices}
+          setNotices={setNotices}
         />
       )}
     </>
