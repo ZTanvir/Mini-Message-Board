@@ -13,7 +13,21 @@ const getAll = async () => {
 const addNotice = async (userId, notice, descriptions) => {
   try {
     const response = await axios.post(`${baseUrl}/new`, {
-      user_id: userId,
+      userId: userId,
+      notice: notice,
+      description: descriptions,
+    });
+    const resonseData = await response.data;
+    return resonseData;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const updateNotice = async (noticeId, userId, notice, descriptions) => {
+  try {
+    const response = await axios.put(`${baseUrl}/${noticeId}`, {
+      userId: userId,
       notice: notice,
       description: descriptions,
     });
@@ -27,4 +41,5 @@ const addNotice = async (userId, notice, descriptions) => {
 export default {
   getAll,
   addNotice,
+  updateNotice,
 };

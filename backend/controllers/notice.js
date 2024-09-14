@@ -32,7 +32,7 @@ noticeRouter.get("/:noticeId", (req, res) => {
   });
 });
 noticeRouter.post("/new", (req, res) => {
-  const { user_id, notice, description } = req.body;
+  const { userId, notice, description } = req.body;
 
   db.serialize(() => {
     const insertTable = `INSERT INTO "notices" ("user_id","notice","description")
@@ -41,7 +41,7 @@ noticeRouter.post("/new", (req, res) => {
 
     db.run(
       insertTable,
-      [Number(user_id), String(notice), String(description)],
+      [Number(userId), String(notice), String(description)],
       (err) => {
         if (err) {
           console.log(err);
@@ -71,17 +71,17 @@ noticeRouter.post("/new", (req, res) => {
   });
 });
 noticeRouter.put("/:noticeId", (req, res) => {
-  const { notice, description } = req.body;
+  const { userId, notice, description } = req.body;
   const { noticeId } = req.params;
 
   db.serialize(() => {
     const updateTable = `UPDATE notices
       SET notice=?,description=? 
-      WHERE id=?`;
+      WHERE id=? AND user_id= ?`;
 
     db.run(
       updateTable,
-      [String(title), String(description), Number(noticeId)],
+      [String(notice), String(description), Number(noticeId), Number(userId)],
       (err) => {
         if (err) {
           res
@@ -94,7 +94,7 @@ noticeRouter.put("/:noticeId", (req, res) => {
       }
     );
 
-    const getTable = `SELECT * FROM "notices" WHERE "id"=? AND "notice" = ? AND "description"=?`;
+    const getTable = `SELECT * FROM "user_notices" WHERE "id"=? AND "notice" = ? AND "description"=?`;
     db.all(
       getTable,
       [Number(noticeId), String(notice), String(description)],

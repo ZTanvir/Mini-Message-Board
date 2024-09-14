@@ -4,6 +4,7 @@ import Comments from "../Comments";
 import EditDelete from "../EditDelete";
 import FormField from "../Form/FormField";
 import formData from "../Form/NoticeFormData";
+import NoticeService from "../../services/notices";
 import styles from "../../styles/noticeDetails.module.css";
 import { useState } from "react";
 
@@ -34,6 +35,8 @@ const NoticeDetails = ({
   const handleEditBtn = (e) => {
     setIsEditForm(true);
     setIsEditDeleteVisiable(false);
+    // after reset the from field it become empty
+    // if the user wanted to edit again
     setFormValues({ noticeTitle: notice, noticeDescription: description });
   };
 
@@ -50,6 +53,28 @@ const NoticeDetails = ({
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
+    // send form data to server
+    async function sendNotice() {
+      try {
+        const newNotice = await NoticeService.updateNotice(
+          noticeId,
+          1,
+          formValues.noticeTitle,
+          formValues.noticeDescription
+        );
+        // remove old notice
+        const allNotices = notices.filter(
+          (notice) => !(notice.id === newNotice[0].id)
+        );
+        // add updated notice
+        setNotices([...allNotices, ...newNotice]);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    sendNotice();
+
+    // update the ui with latest updated data
     console.log(formValues);
   };
 

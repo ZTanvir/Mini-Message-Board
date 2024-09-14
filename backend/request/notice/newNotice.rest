@@ -2,7 +2,7 @@ POST http://localhost:3000/api/notice/new HTTP/1.1
 Content-Type: application/json
 
 {
-    "user_id":"1",
+    "userId":"1",
     "notice":"Top 10 ways to tie a tie",
     "description":"Learning how to tie a tie knot is a rite of passage for every gentleman. And it certainly matters even more so if you are an aspiring dapper gentleman!  In this guide, we’ll show you ten ways to tie a tie knot and the merits of each of them!"
 }
