@@ -34,22 +34,40 @@ const NoticeDetails = ({
   const handleEditBtn = (e) => {
     setIsEditForm(true);
     setIsEditDeleteVisiable(false);
+    setFormValues({ noticeTitle: notice, noticeDescription: description });
   };
+
   const handleDeleteBtn = () => {
     console.log("Delete btn");
   };
-  const handleSubmitForm = () => {};
+
+  const handleCloseBtn = () => {
+    setIsEditForm(false);
+  };
+  const handleResetFrom = () => {
+    setFormValues({ noticeTitle: "", noticeDescription: "" });
+  };
+
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    console.log(formValues);
+  };
 
   return (
     <div className={styles.noticeDetailsContainer}>
       {isEditForm ? (
-        <FormField
-          formData={formData}
-          formName="updateNotice"
-          formValues={formValues}
-          setFormValues={setFormValues}
-          handleSubmitFrom={handleSubmitForm}
-        />
+        <div>
+          <button onClick={handleCloseBtn}>Close</button>
+          <FormField
+            formData={formData}
+            formName="updateNotice"
+            formValues={formValues}
+            isResetForm={true}
+            handleResetBtn={handleResetFrom}
+            setFormValues={setFormValues}
+            handleSubmitFrom={handleSubmitForm}
+          />
+        </div>
       ) : (
         <section data-noticeid={id}>
           <header>

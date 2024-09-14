@@ -5,14 +5,17 @@ const FormField = ({
   formData,
   formName,
   formValues,
+  isResetForm,
+  handleResetBtn,
   setFormValues,
   handleSubmitFrom,
 }) => {
   const id = useId();
   const formId = `${id}-${formName}`;
+  const formEl = useRef();
 
   return (
-    <form onSubmit={handleSubmitFrom} id={formId}>
+    <form ref={formEl} onSubmit={handleSubmitFrom} id={formId}>
       {formData.length > 0
         ? formData.map((data) => (
             <InputElements
@@ -36,6 +39,11 @@ const FormField = ({
           ))
         : null}
       <button type="submit">Add Notice</button>
+      {isResetForm && (
+        <button onClick={handleResetBtn} type="reset">
+          Reset
+        </button>
+      )}
     </form>
   );
 };

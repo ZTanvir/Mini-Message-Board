@@ -61,6 +61,7 @@ const Notices = ({}) => {
           formData={NoticeFormData}
           formName={"addNotice"}
           formValues={formValues}
+          isResetForm={false}
           setFormValues={setFormValues}
           handleSubmitFrom={handleAddNewNotice}
         />
