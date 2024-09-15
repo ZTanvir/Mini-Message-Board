@@ -38,8 +38,19 @@ const updateNotice = async (noticeId, userId, notice, descriptions) => {
   }
 };
 
+const deleteNotice = async (noticeId) => {
+  try {
+    const response = await axios.delete(`${baseUrl}/${noticeId}`);
+    const responseData = await response.data;
+    return responseData;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export default {
   getAll,
   addNotice,
   updateNotice,
+  deleteNotice,
 };
