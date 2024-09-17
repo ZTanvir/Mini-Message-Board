@@ -4,6 +4,7 @@ import Comments from "../Comments";
 import EditDelete from "../EditDelete";
 import FormField from "../Form/FormField";
 import formData from "../Form/NoticeFormData";
+import Dialog from "../Dialog";
 import NoticeService from "../../services/notices";
 import styles from "../../styles/noticeDetails.module.css";
 import { useState } from "react";
@@ -20,6 +21,7 @@ const NoticeDetails = ({
 }) => {
   const [isEditDeleteVisiable, setIsEditDeleteVisiable] = useState(false);
   const [isEditForm, setIsEditForm] = useState(false);
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [formValues, setFormValues] = useState({
     noticeTitle: notice,
     noticeDescription: description,
@@ -41,7 +43,10 @@ const NoticeDetails = ({
   };
 
   const handleDeleteBtn = () => {
-    console.log("Delete btn");
+    // hide edit delete notice section
+    setIsEditDeleteVisiable(false);
+
+    setIsOpenDialog(true);
   };
 
   const handleCloseBtn = () => {
@@ -78,8 +83,17 @@ const NoticeDetails = ({
     console.log(formValues);
   };
 
+  const handleClose = () => {
+    setIsOpenDialog(false);
+  };
+
   return (
     <div className={styles.noticeDetailsContainer}>
+      <Dialog
+        isOpen={isOpenDialog}
+        name="deleteDialog"
+        onClose={handleClose}
+      ></Dialog>
       {isEditForm ? (
         <div>
           <button onClick={handleCloseBtn}>Close</button>
