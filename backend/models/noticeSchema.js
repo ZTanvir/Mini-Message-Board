@@ -17,12 +17,12 @@ db.serialize(() => {
 
   let createNoticeTable = `CREATE TABLE IF NOT EXISTS "notices"(
         "id" INTEGER,
-        "user_id" INTEGER NOT NULL,
+        "user_id" INTEGER NOT NULL ,
         "notice" TEXT NOT NULL,
         "description" TEXT,
         "date" DEFAULT (DATETIME(CURRENT_TIMESTAMP,'LOCALTIME')),
         PRIMARY KEY ("id"),
-        FOREIGN KEY ("user_id") REFERENCES "users"("id")
+        FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE
     );`;
 
   db.run(createNoticeTable, (err) => {
@@ -34,13 +34,13 @@ db.serialize(() => {
   let createCommentsTable = `CREATE TABLE IF NOT EXISTS "comments"(
         "id" INTEGER,
         "user_id" INTEGER NOT NULL,
-        "notice_id" INTEGER NOT NULL,
+        "notice_id" INTEGER NOT NULL ,
         "date" DEFAULT (DATETIME(CURRENT_TIMESTAMP,'LOCALTIME')),
         "comment" TEXT,
         "old_comment" TEXT,
         PRIMARY KEY ("id"),
-        FOREIGN KEY ("user_id") REFERENCES "users"("id"),
-        FOREIGN KEY ("notice_id") REFERENCES "notices"("id")
+        FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE,
+        FOREIGN KEY ("notice_id") REFERENCES "notices"("id") ON DELETE CASCADE
     );`;
 
   db.run(createCommentsTable, (err) => {

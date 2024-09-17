@@ -5,11 +5,9 @@ import NoticesService from "../../services/notices";
 import ToggleElement from "../ToggleElement";
 import FormField from "../Form/FormField";
 import NoticeFormData from "../Form/NoticeFormData";
-import Dialog from "../Dialog";
 
 const Notices = ({}) => {
   const [notices, setNotices] = useState([]);
-  const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [noticeDetails, setNoticeDetails] = useState("");
   const [formValues, setFormValues] = useState({
     noticeTitle: "",

@@ -57,6 +57,7 @@ const NoticeDetails = ({
     setFormValues({ noticeTitle: "", noticeDescription: "" });
   };
 
+  // Add notice
   const handleSubmitForm = (e) => {
     e.preventDefault();
     // send form data to server
@@ -74,6 +75,8 @@ const NoticeDetails = ({
         );
         // add updated notice
         setNotices([...allNotices, ...newNotice]);
+        // hide add notice form
+        setIsEditForm(false);
       } catch (error) {
         console.error(error);
       }
@@ -84,11 +87,26 @@ const NoticeDetails = ({
     console.log(formValues);
   };
 
+  // close delete notice dialog
   const handleClose = () => {
     setIsOpenDialog(false);
   };
+
   const handleDeleteNotice = () => {
     console.log("Delete Notice");
+    async function deleteNotice() {
+      try {
+        const deletedNotice = await NoticeService.deleteNotice(noticeId);
+        const deleteNoticeId = deletedNotice[0].id;
+        const remainNotices = notices.filter(
+          (notice) => !notice.id === deleteNoticeId
+        );
+        setNotices(remainNotices);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    deleteNotice();
   };
 
   return (
