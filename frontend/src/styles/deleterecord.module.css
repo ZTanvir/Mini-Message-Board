@@ -1,0 +1,54 @@
+.deleteRecordContainer {
+  width: 350px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  position: relative;
+}
+.crossIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.deleteIcon {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+.deleteRecordContainer p {
+  text-align: center;
+}
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.buttons button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.cancelBtn {
+  background-color: #c1c1c1;
+}
+.cancelBtn:hover {
+  background-color: #978e8e;
+}
+.deleteBtn {
+  background-color: #e02e38;
+}
+.deleteBtn:hover {
+  background-color: #f1454e;
+}
+
+:is(.cancelBtn, .deleteBtn) {
+  color: white;
+}

@@ -6,6 +6,7 @@ import FormField from "../Form/FormField";
 import formData from "../Form/NoticeFormData";
 import Dialog from "../Dialog";
 import NoticeService from "../../services/notices";
+import DeleteRecord from "../Form/DeleteRecord";
 import styles from "../../styles/noticeDetails.module.css";
 import { useState } from "react";
 
@@ -86,14 +87,15 @@ const NoticeDetails = ({
   const handleClose = () => {
     setIsOpenDialog(false);
   };
+  const handleDeleteNotice = () => {
+    console.log("Delete Notice");
+  };
 
   return (
     <div className={styles.noticeDetailsContainer}>
-      <Dialog
-        isOpen={isOpenDialog}
-        name="deleteDialog"
-        onClose={handleClose}
-      ></Dialog>
+      <Dialog isOpen={isOpenDialog} name="deleteDialog" onClose={handleClose}>
+        <DeleteRecord onDelete={handleDeleteNotice} onCancel={handleClose} />
+      </Dialog>
       {isEditForm ? (
         <div>
           <button onClick={handleCloseBtn}>Close</button>
