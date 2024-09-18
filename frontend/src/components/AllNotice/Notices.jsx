@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Notice from "./Notice";
 import NoticeDetails from "./NoticeDetails";
 import NoticesService from "../../services/notices";
@@ -13,6 +13,7 @@ const Notices = ({}) => {
     noticeTitle: "",
     noticeDescription: "",
   });
+  const toggleElementBtn = useRef(null);
 
   const handleNotice = (e) => {
     const noticeId = Number(e.currentTarget.dataset.noticeid);
@@ -31,6 +32,8 @@ const Notices = ({}) => {
           noticeTitle,
           noticeDescription
         );
+        // click the add notice or close form button inside ToggleElement component
+        toggleElementBtn.current.click();
         setNotices([...notices, newNoticeData[0]]);
       } catch (error) {
         console.error(error);
@@ -56,7 +59,7 @@ const Notices = ({}) => {
   return (
     <>
       <h1>Notice board</h1>
-      <ToggleElement btnText={"Add Notice"}>
+      <ToggleElement ref={toggleElementBtn} btnText={"Add Notice"}>
         <FormField
           formData={NoticeFormData}
           formName={"addNotice"}

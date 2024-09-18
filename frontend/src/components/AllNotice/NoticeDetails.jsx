@@ -53,6 +53,7 @@ const NoticeDetails = ({
   const handleCloseBtn = () => {
     setIsEditForm(false);
   };
+
   const handleResetFrom = () => {
     setFormValues({ noticeTitle: "", noticeDescription: "" });
   };
@@ -82,9 +83,6 @@ const NoticeDetails = ({
       }
     }
     sendNotice();
-
-    // update the ui with latest updated data
-    console.log(formValues);
   };
 
   // close delete notice dialog
@@ -93,7 +91,6 @@ const NoticeDetails = ({
   };
 
   const handleDeleteNotice = () => {
-    console.log("Delete Notice");
     async function deleteNotice() {
       try {
         const deletedNotice = await NoticeService.deleteNotice(noticeId);

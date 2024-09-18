@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = `http://localhost:3002/api/notice`;
+const baseUrl = `http://localhost:3000/api/notice`;
 
 const getAll = async () => {
   try {
@@ -10,6 +10,7 @@ const getAll = async () => {
     console.error(error);
   }
 };
+
 const addNotice = async (userId, notice, descriptions) => {
   try {
     const response = await axios.post(`${baseUrl}/new`, {

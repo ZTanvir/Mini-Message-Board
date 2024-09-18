@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 
-const ToggleElement = ({ children, btnText }) => {
+const ToggleElement = forwardRef(({ children, btnText }, ref) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleElement = (e) => {
@@ -9,11 +9,11 @@ const ToggleElement = ({ children, btnText }) => {
 
   return (
     <div>
-      <button onClick={handleToggleElement}>
+      <button ref={ref} onClick={handleToggleElement}>
         {isOpen ? "close" : btnText}
       </button>
       {isOpen ? children : null}
     </div>
   );
-};
+});
 export default ToggleElement;
