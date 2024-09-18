@@ -95,9 +95,14 @@ const NoticeDetails = ({
       try {
         const deletedNotice = await NoticeService.deleteNotice(noticeId);
         const deleteNoticeId = deletedNotice[0].id;
+        console.log("Notice id:", deleteNoticeId, notices);
+
         const remainNotices = notices.filter(
-          (notice) => !notice.id === deleteNoticeId
+          (notice) => !(notice.id === deleteNoticeId)
         );
+        setIsOpenDialog(false);
+        console.log("Remaining notice", remainNotices);
+
         setNotices(remainNotices);
       } catch (error) {
         console.error(error);
