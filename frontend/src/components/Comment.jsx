@@ -1,5 +1,7 @@
 import UserName from "./Username";
 import DateTime from "./DateTime";
+import EditDelete from "./EditDelete";
+import { useState } from "react";
 
 const Comment = ({
   noticeId,
@@ -10,8 +12,16 @@ const Comment = ({
   comment,
   oldComment,
 }) => {
+  const [showEditDelete, setShowEditDelete] = useState(false);
+
   const fullName = firstName + " " + lastName;
   const lastComment = oldComment;
+
+  const handleModifyComment = () => {
+    setShowEditDelete(!showEditDelete);
+  };
+  const handleEditComment = () => {};
+  const handleDeleteComment = () => {};
 
   return (
     <>
@@ -31,11 +41,28 @@ const Comment = ({
           </p>
           <div>
             <p>{comment}</p>
-            <span>edit</span>
+            <div>
+              <span
+                onClick={handleModifyComment}
+                className="material-symbols-outlined"
+              >
+                more_horiz
+              </span>
+              {showEditDelete && (
+                <EditDelete
+                  handleEditBtn={handleEditComment}
+                  handleDeleteBtn={handleDeleteComment}
+                />
+              )}
+            </div>
           </div>
         </main>
         <footer>
-          
+          {/* todo
+            1. Add new comment
+            2. Edit comment
+            3. Delete comment
+          */}
         </footer>
       </div>
     </>

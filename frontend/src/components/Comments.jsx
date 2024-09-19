@@ -21,7 +21,12 @@ const Comments = ({ noticeId }) => {
 
   return (
     <>
-      {comments.length > 0 ? <h3>Comments:{comments.length}</h3> : null}
+      {comments.length > 0 ? (
+        <h3>
+          Comments (
+          {comments.length < 10 ? `0${comments.length}` : comments.length})
+        </h3>
+      ) : null}
       {comments.length > 0
         ? comments.map((comment) => (
             <Comment
