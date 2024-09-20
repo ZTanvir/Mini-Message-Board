@@ -17,7 +17,7 @@ const Comments = ({ noticeId }) => {
       }
     }
     getCommentsData(noticeId);
-  }, []);
+  }, [comments]);
 
   return (
     <>
@@ -31,6 +31,8 @@ const Comments = ({ noticeId }) => {
         ? comments.map((comment) => (
             <Comment
               key={comment.id}
+              allComments={comments}
+              setAllComments={setComments}
               noticeId={noticeId}
               commentId={comment.id}
               firstName={comment.first_name}

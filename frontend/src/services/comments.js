@@ -10,4 +10,20 @@ const getComments = async (noticeId) => {
     console.error(error);
   }
 };
-export default { getComments };
+
+const updateComment = async (userId, noticeId, commentId, comment) => {
+  try {
+    const response = await axios.put(
+      `${baseUrl}/${noticeId}/comment/${commentId}`,
+      {
+        userId: userId,
+        comment: comment,
+      }
+    );
+    const data = await response.data;
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+export default { getComments, updateComment };
