@@ -1,6 +1,8 @@
 import UserName from "./Username";
 import DateTime from "./DateTime";
 import EditDelete from "./EditDelete";
+import Dialog from "./Dialog";
+import DeleteRecord from "./Form/DeleteRecord";
 import CommentService from "../services/comments";
 import { useState } from "react";
 
@@ -18,6 +20,7 @@ const Comment = ({
   const [showEditDelete, setShowEditDelete] = useState(false);
   const [userComment, setUserComment] = useState("");
   const [showEditCmnt, setShowEditCmnt] = useState(false);
+  const [isShowDialog, setIsShowDialog] = useState(false);
 
   const fullName = firstName + " " + lastName;
   const lastComment = oldComment;
@@ -25,7 +28,7 @@ const Comment = ({
   const handleModifyComment = () => {
     setShowEditDelete(!showEditDelete);
   };
-  const handleUpdateComment = () => {
+  const handleUpdateUi = () => {
     // hide edit delete section
     setShowEditDelete(true);
     // show input field where user can type new comment
@@ -33,7 +36,10 @@ const Comment = ({
     // populate input field with comment text
     setUserComment(comment);
   };
-  const handleDeleteComment = () => {};
+  const handleDeleteUi = () => {
+    setIsShowDialog(true);
+    setShowEditDelete(false);
+  };
 
   const handleCancelBtn = () => {
     // hide edit comment form field
@@ -71,6 +77,27 @@ const Comment = ({
     }
     updateComment();
   };
+
+  const handleCloseDialog = () => {
+    setIsShowDialog(false);
+  };
+
+  const handleDeleteComment = () => {
+    async function deleteComment() {
+      const deletedComment = await CommentService.deleteComment(
+        noticeId,
+        commentId
+      );
+      if (deleteComment.message !== "Comment not found") {
+        const othersComments = allComments.filter(
+          (cmnt) => !(cmnt.id === deletedComment.id)
+        );
+        setAllComments(othersComments);
+      }
+    }
+    deleteComment();
+  };
+
   return (
     <>
       <div data-commentid={commentId} className="">
@@ -116,14 +143,26 @@ const Comment = ({
                   </span>
                   {showEditDelete && (
                     <EditDelete
-                      handleEditBtn={handleUpdateComment}
-                      handleDeleteBtn={handleDeleteComment}
+                      handleEditBtn={handleUpdateUi}
+                      handleDeleteBtn={handleDeleteUi}
                     />
                   )}
                 </div>
               </div>
             )}
           </div>
+          {isShowDialog && (
+            <Dialog
+              isOpen={true}
+              onClose={handleCloseDialog}
+              name="deleteComment"
+            >
+              <DeleteRecord
+                onDelete={handleDeleteComment}
+                onCancel={handleCloseDialog}
+              />
+            </Dialog>
+          )}
         </main>
         <footer>
           {/* todo

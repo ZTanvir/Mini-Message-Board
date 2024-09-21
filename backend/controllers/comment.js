@@ -127,8 +127,10 @@ commentRouter.delete("/:commentId", (req, res) => {
             .status(500)
             .json({ error: "database error check dev console" });
         }
+        console.log(row);
+
         // is comment in the db
-        if (row.length === 0) {
+        if (row === undefined) {
           // comment not found
           return res.status(404).json({ message: "Comment not found" });
         }

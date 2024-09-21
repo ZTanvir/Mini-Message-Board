@@ -1,1 +1,1 @@
-DELETE http://localhost:3000/api/notice/4/comment/5 HTTP/1.1
+DELETE http://localhost:3000/api/notice/1/comment/4 HTTP/1.1

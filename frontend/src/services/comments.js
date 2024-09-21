@@ -26,4 +26,16 @@ const updateComment = async (userId, noticeId, commentId, comment) => {
     console.error(error);
   }
 };
-export default { getComments, updateComment };
+
+const deleteComment = async (noticeId, commentId) => {
+  try {
+    const response = await axios.delete(
+      `${baseUrl}/${noticeId}/comment/${commentId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export default { getComments, updateComment, deleteComment };
