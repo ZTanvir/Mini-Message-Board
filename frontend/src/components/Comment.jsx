@@ -6,24 +6,16 @@ import DeleteRecord from "./Form/DeleteRecord";
 import CommentService from "../services/comments";
 import { useState } from "react";
 
-const Comment = ({
-  noticeId,
-  allComments,
-  setAllComments,
-  commentId,
-  firstName,
-  lastName,
-  date,
-  comment,
-  oldComment,
-}) => {
+const Comment = ({ noticeId, allComments, setAllComments, commentData }) => {
   const [showEditDelete, setShowEditDelete] = useState(false);
   const [userComment, setUserComment] = useState("");
   const [showEditCmnt, setShowEditCmnt] = useState(false);
   const [isShowDialog, setIsShowDialog] = useState(false);
 
-  const fullName = firstName + " " + lastName;
-  const lastComment = oldComment;
+  const { id, first_name, last_name, date, comment, old_comment } = commentData;
+  const fullName = first_name + " " + last_name;
+  const commentId = id;
+  const lastComment = old_comment;
 
   const handleModifyComment = () => {
     setShowEditDelete(!showEditDelete);
@@ -53,6 +45,7 @@ const Comment = ({
   // submit edit comment form
   const handleEditComment = (e) => {
     e.preventDefault();
+
     async function updateComment() {
       try {
         const updatedComment = await CommentService.updateComment(
@@ -65,7 +58,7 @@ const Comment = ({
         const otherComments = allComments.filter(
           (comment) => !(comment.id === updatedComment[0].id)
         );
-        const everyComments = [...allComments, ...otherComments];
+        const everyComments = [...otherComments, ...updatedComment];
 
         setShowEditCmnt(false);
         setUserComment("");
@@ -164,27 +157,6 @@ const Comment = ({
             </Dialog>
           )}
         </main>
-        <footer>
-          {/* todo
-            1. Add new comment
-            2. Edit comment
-            3. Delete comment
-          */}
-          {/* show only if edit comment section is hidden */}
-          {!showEditCmnt && (
-            <form id="addComment">
-              <input
-                type="text"
-                value={userComment}
-                onChange={(e) => setUserComment(e.target.value)}
-                placeholder="Write a comment..."
-              />
-              <button type="submit">
-                <span className="material-symbols-outlined">send</span>
-              </button>
-            </form>
-          )}
-        </footer>
       </div>
     </>
   );
