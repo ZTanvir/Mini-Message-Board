@@ -32,49 +32,12 @@ const Comment = ({
     setUserComment({
       comment: commentData.comment,
       isEdit: true,
+      commentId,
     });
   };
   const handleDeleteUi = () => {
     setIsShowDialog(true);
     setShowEditDelete(false);
-  };
-
-  const handleCancelBtn = () => {
-    // hide edit comment form field
-    setShowEditCmnt(false);
-    // set comment to initial value
-    setUserComment("");
-    // hide edit delete section
-    setShowEditDelete(false);
-  };
-
-  // submit edit comment form
-  const handleEditComment = (e) => {
-    e.preventDefault();
-
-    async function updateComment() {
-      try {
-        const updatedComment = await CommentService.updateComment(
-          1,
-          noticeId,
-          commentId,
-          userComment
-        );
-
-        const otherComments = allComments.filter(
-          (comment) => !(comment.id === updatedComment[0].id)
-        );
-        const everyComments = [...otherComments, ...updatedComment];
-
-        setShowEditCmnt(false);
-        setUserComment("");
-        setShowEditDelete(false);
-        setAllComments(everyComments);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    updateComment();
   };
 
   const handleCloseDialog = () => {

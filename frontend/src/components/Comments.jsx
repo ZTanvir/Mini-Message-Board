@@ -12,10 +12,33 @@ const Comments = ({ noticeId }) => {
   const handleSubmitComment = (e) => {
     e.preventDefault();
     if (userComment.isEdit) {
-      console.log("edit comment");
+      const commentId = userComment.commentId;
+      const commentText = userComment.comment;
+      async function updateComment() {
+        try {
+          const updatedComment = await CommentService.updateComment(
+            1,
+            noticeId,
+            commentId,
+            commentText
+          );
+
+          const otherComments = comments.filter(
+            (comment) => !(comment.id === updatedComment[0].id)
+          );
+
+          const everyComments = [...otherComments, ...updatedComment];
+          setComments(everyComments);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      updateComment();
     } else {
       console.log("new comment");
     }
+    console.log(userComment);
+
     setUserComment({ comment: "", isEdit: false });
   };
 
