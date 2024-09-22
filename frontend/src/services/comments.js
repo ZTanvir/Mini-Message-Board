@@ -11,6 +11,22 @@ const getComments = async (noticeId) => {
   }
 };
 
+const addComment = async (noticeId, userId, comment) => {
+  try {
+    const result = await axios.post(
+      `http://localhost:3000/api/notice/${noticeId}/comment/new`,
+      {
+        userId,
+        comment,
+      }
+    );
+    const data = await result.data;
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const updateComment = async (userId, noticeId, commentId, comment) => {
   try {
     const response = await axios.put(
@@ -38,4 +54,4 @@ const deleteComment = async (noticeId, commentId) => {
   }
 };
 
-export default { getComments, updateComment, deleteComment };
+export default { getComments, addComment, updateComment, deleteComment };

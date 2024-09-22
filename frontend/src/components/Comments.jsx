@@ -35,9 +35,27 @@ const Comments = ({ noticeId }) => {
       }
       updateComment();
     } else {
-      console.log("new comment");
+      const commentText = userComment.comment;
+      const userId = 1;
+      async function addComment() {
+        try {
+          const addComment = await CommentService.addComment(
+            noticeId,
+            userId,
+            commentText
+          );
+          console.log("addComment", addComment);
+
+          const allComments = comments.concat(addComment[0]);
+          console.log(allComments);
+
+          setComments(allComments);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      addComment();
     }
-    console.log(userComment);
 
     setUserComment({ comment: "", isEdit: false });
   };
