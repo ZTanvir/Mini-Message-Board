@@ -4,7 +4,24 @@ import CommentService from "../services/comments";
 
 const Comments = ({ noticeId }) => {
   const [comments, setComments] = useState([]);
-  const [userComment, setUserComment] = useState("");
+  const [userComment, setUserComment] = useState({
+    comment: "",
+    isEdit: false,
+  });
+
+  const handleSubmitComment = (e) => {
+    e.preventDefault();
+    if (userComment.isEdit) {
+      console.log("edit comment");
+    } else {
+      console.log("new comment");
+    }
+    setUserComment({ comment: "", isEdit: false });
+  };
+
+  const handleCancelSubmitForm = () => {
+    setUserComment({ comment: "", isEdit: false });
+  };
 
   useEffect(() => {
     async function getCommentsData(noticeId) {
@@ -19,7 +36,6 @@ const Comments = ({ noticeId }) => {
       }
     }
     getCommentsData(noticeId);
-    console.log("effect run");
 
     return () => {};
   }, []);
@@ -39,20 +55,36 @@ const Comments = ({ noticeId }) => {
               setAllComments={setComments}
               noticeId={noticeId}
               commentData={comment}
+              userComment={userComment}
+              setUserComment={setUserComment}
             />
           ))}
         </div>
       ) : null}
-      <form id="addComment">
-        <input
-          type="text"
-          value={userComment}
-          onChange={(e) => setUserComment(e.target.value)}
-          placeholder="Write a comment..."
-        />
-        <button type="submit">
-          <span className="material-symbols-outlined">send</span>
+      <form id="addComment" onSubmit={handleSubmitComment}>
+        <button type="button" onClick={handleCancelSubmitForm}>
+          Cancel
         </button>
+        <div>
+          <textarea
+            rows={2}
+            cols={50}
+            value={userComment["comment"]}
+            onChange={(e) =>
+              setUserComment({
+                ...userComment,
+                comment: e.target.value,
+              })
+            }
+            placeholder={
+              userComment.isEdit ? "Edit comment..." : "Write comment..."
+            }
+            required={true}
+          />
+          <button type="submit">
+            <span className="material-symbols-outlined">send</span>
+          </button>
+        </div>
       </form>
     </>
   );

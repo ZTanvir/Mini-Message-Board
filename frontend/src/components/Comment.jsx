@@ -6,10 +6,15 @@ import DeleteRecord from "./Form/DeleteRecord";
 import CommentService from "../services/comments";
 import { useState } from "react";
 
-const Comment = ({ noticeId, allComments, setAllComments, commentData }) => {
+const Comment = ({
+  noticeId,
+  allComments,
+  setAllComments,
+  commentData,
+  userComment,
+  setUserComment,
+}) => {
   const [showEditDelete, setShowEditDelete] = useState(false);
-  const [userComment, setUserComment] = useState("");
-  const [showEditCmnt, setShowEditCmnt] = useState(false);
   const [isShowDialog, setIsShowDialog] = useState(false);
 
   const { id, first_name, last_name, date, comment, old_comment } = commentData;
@@ -22,11 +27,12 @@ const Comment = ({ noticeId, allComments, setAllComments, commentData }) => {
   };
   const handleUpdateUi = () => {
     // hide edit delete section
-    setShowEditDelete(true);
-    // show input field where user can type new comment
-    setShowEditCmnt(true);
-    // populate input field with comment text
-    setUserComment(comment);
+    setShowEditDelete(false);
+    // make comment status as edit comment
+    setUserComment({
+      comment: commentData.comment,
+      isEdit: true,
+    });
   };
   const handleDeleteUi = () => {
     setIsShowDialog(true);
@@ -108,42 +114,25 @@ const Comment = ({ noticeId, allComments, setAllComments, commentData }) => {
             <span>edited</span>
           </p>
           <div>
-            {showEditCmnt === true ? (
-              <form id="addComment" onSubmit={handleEditComment}>
-                <div>
-                  <input
-                    type="text"
-                    value={userComment}
-                    onChange={(e) => setUserComment(e.target.value)}
-                  />
-                  <button type="submit">
-                    <span className="material-symbols-outlined">send</span>
-                  </button>
-                </div>
-                <div>
-                  <button onClick={handleCancelBtn}>Cancel</button>
-                </div>
-              </form>
-            ) : (
+            <div>
+              <p>{comment}</p>
               <div>
-                <p>{comment}</p>
-                <div>
-                  <span
-                    onClick={handleModifyComment}
-                    className="material-symbols-outlined"
-                  >
-                    more_horiz
-                  </span>
-                  {showEditDelete && (
-                    <EditDelete
-                      handleEditBtn={handleUpdateUi}
-                      handleDeleteBtn={handleDeleteUi}
-                    />
-                  )}
-                </div>
+                <span
+                  onClick={handleModifyComment}
+                  className="material-symbols-outlined"
+                >
+                  more_horiz
+                </span>
+                {showEditDelete && (
+                  <EditDelete
+                    handleEditBtn={handleUpdateUi}
+                    handleDeleteBtn={handleDeleteUi}
+                  />
+                )}
               </div>
-            )}
+            </div>
           </div>
+
           {isShowDialog && (
             <Dialog
               isOpen={true}

@@ -127,7 +127,6 @@ commentRouter.delete("/:commentId", (req, res) => {
             .status(500)
             .json({ error: "database error check dev console" });
         }
-        console.log(row);
 
         // is comment in the db
         if (row === undefined) {
