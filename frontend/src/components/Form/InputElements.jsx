@@ -1,4 +1,5 @@
 import { useId } from "react";
+import styles from "../../styles/Form/inputelement.module.css";
 
 const InputElements = ({
   labelText,
@@ -15,10 +16,13 @@ const InputElements = ({
   const fieldId = `${inputId}-${name}`;
 
   return (
-    <div>
-      <label htmlFor={fieldId}>{labelText}</label>
+    <div className={styles.inputElementContainer}>
+      <label htmlFor={fieldId}>
+        {isRequired ? `${labelText} (required)` : { labelText }}
+      </label>
       {type === "textarea" ? (
         <textarea
+          className={styles.textAreaField}
           id={fieldId}
           name={name}
           rows={rows}

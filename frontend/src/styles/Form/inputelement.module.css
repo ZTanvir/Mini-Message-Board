@@ -1,0 +1,21 @@
+.inputElementContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.inputElementContainer label,
+input,
+button,
+select,
+legend,
+textarea {
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+.inputElementContainer input,
+textarea {
+  padding: 0.4rem;
+}
+.textAreaField {
+  resize: none;
+}
