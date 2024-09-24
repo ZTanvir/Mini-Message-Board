@@ -1,5 +1,6 @@
 import { useId, useRef } from "react";
 import InputElements from "./InputElements";
+import styles from "../../styles/Form/form.module.css";
 
 const FormField = ({
   formData,
@@ -15,7 +16,12 @@ const FormField = ({
   const formEl = useRef();
 
   return (
-    <form ref={formEl} onSubmit={handleSubmitFrom} id={formId}>
+    <form
+      className={styles.formContainer}
+      ref={formEl}
+      onSubmit={handleSubmitFrom}
+      id={formId}
+    >
       {formData.length > 0
         ? formData.map((data) => (
             <InputElements
