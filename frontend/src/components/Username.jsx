@@ -7,10 +7,12 @@ const UserName = ({ name }) => {
   };
 
   return (
-    <p style={fullNameContainer}>
+    <div style={fullNameContainer}>
       <span className="material-symbols-outlined">person</span>{" "}
-      <span style={{ textTransform: "capitalize" }}>{name}</span>
-    </p>
+      <span style={{ textTransform: "capitalize", fontWeight: "300" }}>
+        {name}
+      </span>
+    </div>
   );
 };
 export default UserName;

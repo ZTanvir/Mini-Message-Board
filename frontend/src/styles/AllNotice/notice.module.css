@@ -9,3 +9,7 @@
   display: flex;
   gap: 1rem;
 }
+.noticeContainer h2 {
+  font-size: 1.875rem;
+  font-weight: 400;
+}

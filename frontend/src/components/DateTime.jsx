@@ -38,14 +38,14 @@ const DateTime = ({ showIcon, date, time }) => {
   };
 
   return (
-    <p className={styles.dateTime}>
+    <div className={styles.dateTimeContainer}>
       {showIcon && (
         <span className="material-symbols-outlined">calendar_month</span>
       )}
-      {date && <span>{formateDate(date)}</span>}
+      {date && <span className={styles.date}>{formateDate(date)}</span>}
       {time && <span className={styles.roundBall}></span>}
-      {time && <span>{formateTime(date)}</span>}
-    </p>
+      {time && <span className={styles.time}>{formateTime(date)}</span>}
+    </div>
   );
 };
 export default DateTime;

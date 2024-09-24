@@ -1,4 +1,4 @@
-.dateTime {
+.dateTimeContainer {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -8,4 +8,7 @@
   height: 7px;
   background-color: darkgray;
   border-radius: 50%;
+}
+.dateTimeContainer :is(.date, .time) {
+  font-weight: 300;
 }
