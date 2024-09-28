@@ -5,6 +5,7 @@ import NoticesService from "../../services/notices";
 import ToggleElement from "../ToggleElement";
 import FormField from "../Form/FormField";
 import NoticeFormData from "../Form/NoticeFormData";
+import styles from "../../styles/AllNotice/notices.module.css";
 
 const Notices = ({}) => {
   const [notices, setNotices] = useState([]);
@@ -57,7 +58,7 @@ const Notices = ({}) => {
   }, []);
 
   return (
-    <>
+    <div className={styles.noticesContainer}>
       <h1>Notice board</h1>
       <ToggleElement ref={toggleElementBtn} btnText={"Add Notice"}>
         <FormField
@@ -69,32 +70,34 @@ const Notices = ({}) => {
           handleSubmitFrom={handleAddNewNotice}
         />
       </ToggleElement>
-      {Boolean(notices.length > 0)
-        ? notices.map((notice) => (
-            <Notice
-              key={notice.id}
-              id={notice.id}
-              title={notice.notice}
-              firstName={notice.first_name}
-              lastName={notice.last_name}
-              date={notice.date}
-              handleNotice={handleNotice}
-            />
-          ))
-        : null}
-      {noticeDetails && (
-        <NoticeDetails
-          id={noticeDetails.id}
-          first_name={noticeDetails.first_name}
-          last_name={noticeDetails.last_name}
-          notice={noticeDetails.notice}
-          description={noticeDetails.description}
-          date={noticeDetails.date}
-          notices={notices}
-          setNotices={setNotices}
-        />
-      )}
-    </>
+      <div className={styles.allNotices}>
+        {Boolean(notices.length > 0)
+          ? notices.map((notice) => (
+              <Notice
+                key={notice.id}
+                id={notice.id}
+                title={notice.notice}
+                firstName={notice.first_name}
+                lastName={notice.last_name}
+                date={notice.date}
+                handleNotice={handleNotice}
+              />
+            ))
+          : null}
+        {noticeDetails && (
+          <NoticeDetails
+            id={noticeDetails.id}
+            first_name={noticeDetails.first_name}
+            last_name={noticeDetails.last_name}
+            notice={noticeDetails.notice}
+            description={noticeDetails.description}
+            date={noticeDetails.date}
+            notices={notices}
+            setNotices={setNotices}
+          />
+        )}
+      </div>
+    </div>
   );
 };
 export default Notices;
