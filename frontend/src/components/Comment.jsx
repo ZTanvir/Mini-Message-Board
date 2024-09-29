@@ -4,6 +4,7 @@ import EditDelete from "./EditDelete";
 import Dialog from "./Dialog";
 import DeleteRecord from "./Form/DeleteRecord";
 import CommentService from "../services/comments";
+import style from "../styles/comment.module.css";
 import { useState } from "react";
 
 const Comment = ({
@@ -62,13 +63,17 @@ const Comment = ({
 
   return (
     <>
-      <div data-commentid={commentId} className="">
+      <section data-commentid={commentId} className={style.commentContainer}>
         <header>
-          <div></div>
+          <div className={style.profileImage}></div>
           <div>
-            <div>
-              <UserName name={fullName} />
-              <DateTime showIcon={false} date={date} time={true} />
+            <div className={style.userInfo}>
+              <div className={style.username}>
+                <UserName name={fullName} />
+              </div>
+              <div className={style.commentDateTime}>
+                <DateTime showIcon={false} date={date} time={true} />
+              </div>
             </div>
           </div>
         </header>
@@ -78,7 +83,7 @@ const Comment = ({
           </p>
           <div>
             <div>
-              <p>{comment}</p>
+              <p className={style.commentText}>{comment}</p>
               <div>
                 <span
                   onClick={handleModifyComment}
@@ -109,7 +114,7 @@ const Comment = ({
             </Dialog>
           )}
         </main>
-      </div>
+      </section>
     </>
   );
 };

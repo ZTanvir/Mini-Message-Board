@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import style from "../styles/comments.module.css";
 import Comment from "./Comment";
 import CommentService from "../services/comments";
 
@@ -44,11 +45,7 @@ const Comments = ({ noticeId }) => {
             userId,
             commentText
           );
-          console.log("addComment", addComment);
-
           const allComments = comments.concat(addComment[0]);
-          console.log(allComments);
-
           setComments(allComments);
         } catch (error) {
           console.error(error);
@@ -84,7 +81,7 @@ const Comments = ({ noticeId }) => {
   return (
     <>
       {comments.length > 0 ? (
-        <div>
+        <section className={style.commentContainer}>
           <h3>
             Comments (
             {comments.length < 10 ? `0${comments.length}` : comments.length})
@@ -100,7 +97,7 @@ const Comments = ({ noticeId }) => {
               setUserComment={setUserComment}
             />
           ))}
-        </div>
+        </section>
       ) : null}
       <form id="addComment" onSubmit={handleSubmitComment}>
         <button type="button" onClick={handleCancelSubmitForm}>

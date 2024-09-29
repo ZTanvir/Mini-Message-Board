@@ -1,0 +1,12 @@
+.commentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.profileImage {
+}
+.username div span {
+  font-weight: 500 !important;
+}
+.commentText {
+}
