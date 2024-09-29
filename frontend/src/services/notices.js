@@ -11,6 +11,16 @@ const getAll = async () => {
   }
 };
 
+const getSingleNotice = async (id) => {
+  try {
+    const response = await axios.get(`${baseUrl}/${id}`);
+    const data = await response.data;
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const addNotice = async (userId, notice, descriptions) => {
   try {
     const response = await axios.post(`${baseUrl}/new`, {
@@ -51,6 +61,7 @@ const deleteNotice = async (noticeId) => {
 
 export default {
   getAll,
+  getSingleNotice,
   addNotice,
   updateNotice,
   deleteNotice,

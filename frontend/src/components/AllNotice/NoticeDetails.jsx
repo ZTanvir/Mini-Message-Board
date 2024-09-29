@@ -8,27 +8,22 @@ import Dialog from "../Dialog";
 import NoticeService from "../../services/notices";
 import DeleteRecord from "../Form/DeleteRecord";
 import styles from "../../styles/noticeDetails.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-const NoticeDetails = ({
-  id,
-  first_name,
-  last_name,
-  notice,
-  description,
-  date,
-  notices,
-  setNotices,
-}) => {
+const NoticeDetails = ({ notices, setNotices }) => {
   const [isEditDeleteVisiable, setIsEditDeleteVisiable] = useState(false);
   const [isEditForm, setIsEditForm] = useState(false);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const [noticeDetails, setNoticeDetails] = useState("");
   const [formValues, setFormValues] = useState({
-    noticeTitle: notice,
-    noticeDescription: description,
+    noticeTitle: noticeDetails !== "" ? noticeDetails.notice : "",
+    noticeDescription: noticeDetails !== "" ? noticeDetails.description : "",
   });
-  const fullName = first_name + " " + last_name;
-  const noticeId = id;
+  // const fullName = first_name + " " + last_name;
+  // const noticeId = id;
+  //  id, first_name,last_name,notice,description,date,
+  const noticeUrlId = useParams();
 
   const handleEditNotice = () => {
     // toggle EditDelete component
@@ -109,6 +104,20 @@ const NoticeDetails = ({
     deleteNotice();
   };
 
+  useEffect(() => {
+    const { id } = noticeUrlId;
+
+    async function getNoticeData() {
+      try {
+        const noticeData = await NoticeService.getSingleNotice(id);
+        setNoticeDetails(noticeData);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getNoticeData();
+  }, []);
+
   return (
     <div className={styles.noticeDetailsContainer}>
       <Dialog isOpen={isOpenDialog} name="deleteDialog" onClose={handleClose}>
@@ -128,11 +137,14 @@ const NoticeDetails = ({
           />
         </div>
       ) : (
-        <section data-noticeid={id}>
+        <section
+          className={styles.noticeDetails}
+          data-noticeid={noticeUrlId.id}
+        >
           <header>
             <div className={styles.titleIconContainer}>
               <h2 className={styles.noticeTitle}>
-                {notice}
+                {noticeDetails.notice}
                 <span
                   onClick={handleEditNotice}
                   className="material-symbols-outlined"
@@ -147,24 +159,34 @@ const NoticeDetails = ({
                 />
               )}
               <div className={styles.noticeTitleIcon}>
-                <span className="material-symbols-outlined">campaign</span>
+                <span
+                  className={`material-symbols-outlined ${styles.noticeTitleIconImg}`}
+                >
+                  campaign
+                </span>
               </div>
             </div>
             <div className={styles.nameDateContainer}>
-              <UserName name={fullName} />
-              <DateTime showIcon={true} date={date} time={false} />
+              <UserName
+                name={noticeDetails.first_name + " " + noticeDetails.last_name}
+              />
+              <DateTime
+                showIcon={true}
+                date={noticeDetails.date}
+                time={false}
+              />
             </div>
           </header>
           <div className={styles.horizontalLine}></div>
           <main>
             <h3>Notice Details</h3>
-            <p>{description}</p>
+            <p>{noticeDetails.description}</p>
           </main>
         </section>
       )}
 
       <section className={styles.commentsContainer}>
-        <Comments noticeId={noticeId} />
+        <Comments noticeId={noticeUrlId.id} />
       </section>
     </div>
   );

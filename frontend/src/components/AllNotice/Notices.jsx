@@ -6,22 +6,14 @@ import ToggleElement from "../ToggleElement";
 import FormField from "../Form/FormField";
 import NoticeFormData from "../Form/NoticeFormData";
 import styles from "../../styles/AllNotice/notices.module.css";
+import { Link } from "react-router-dom";
 
-const Notices = ({}) => {
-  const [notices, setNotices] = useState([]);
-  const [noticeDetails, setNoticeDetails] = useState("");
+const Notices = ({ notices, setNotices, setNoticeDetails }) => {
   const [formValues, setFormValues] = useState({
     noticeTitle: "",
     noticeDescription: "",
   });
   const toggleElementBtn = useRef(null);
-
-  const handleNotice = (e) => {
-    const noticeId = Number(e.currentTarget.dataset.noticeid);
-    const getNoticeDetails = notices.filter((notice) => notice.id === noticeId);
-    const noticeData = getNoticeDetails.length > 0 ? getNoticeDetails[0] : "";
-    setNoticeDetails(noticeData);
-  };
 
   const handleAddNewNotice = (e) => {
     e.preventDefault();
@@ -44,6 +36,14 @@ const Notices = ({}) => {
     // reset add notice form
     setFormValues({ noticeTitle: "", noticeDescription: "" });
   };
+  const handleNoticeDetails = (e) => {
+    const noticeId = Number(e.currentTarget.dataset.id);
+    const noticeData = notices.filter(
+      (notice) => Number(noticeId) === notice.id
+    );
+    const noticeDataObj = { ...noticeData[0] };
+    setNoticeDetails(noticeDataObj);
+  };
 
   useEffect(() => {
     const getNotices = async () => {
@@ -59,7 +59,9 @@ const Notices = ({}) => {
 
   return (
     <div className={styles.noticesContainer}>
-      <h1>Notice board</h1>
+      <h1>
+        <Link to={`/`}>Notice board </Link>
+      </h1>
       <ToggleElement ref={toggleElementBtn} btnText={"Add Notice"}>
         <FormField
           formData={NoticeFormData}
@@ -73,29 +75,22 @@ const Notices = ({}) => {
       <div className={styles.allNotices}>
         {Boolean(notices.length > 0)
           ? notices.map((notice) => (
-              <Notice
+              <Link
+                onClick={handleNoticeDetails}
                 key={notice.id}
-                id={notice.id}
-                title={notice.notice}
-                firstName={notice.first_name}
-                lastName={notice.last_name}
-                date={notice.date}
-                handleNotice={handleNotice}
-              />
+                data-id={notice.id}
+                to={`notice/${notice.id}`}
+              >
+                <Notice
+                  id={notice.id}
+                  title={notice.notice}
+                  firstName={notice.first_name}
+                  lastName={notice.last_name}
+                  date={notice.date}
+                />
+              </Link>
             ))
           : null}
-        {noticeDetails && (
-          <NoticeDetails
-            id={noticeDetails.id}
-            first_name={noticeDetails.first_name}
-            last_name={noticeDetails.last_name}
-            notice={noticeDetails.notice}
-            description={noticeDetails.description}
-            date={noticeDetails.date}
-            notices={notices}
-            setNotices={setNotices}
-          />
-        )}
       </div>
     </div>
   );
