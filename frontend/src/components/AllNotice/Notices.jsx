@@ -6,7 +6,7 @@ import ToggleElement from "../ToggleElement";
 import FormField from "../Form/FormField";
 import NoticeFormData from "../Form/NoticeFormData";
 import styles from "../../styles/AllNotice/notices.module.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Notices = ({ notices, setNotices, setNoticeDetails }) => {
   const [formValues, setFormValues] = useState({
@@ -60,7 +60,14 @@ const Notices = ({ notices, setNotices, setNoticeDetails }) => {
   return (
     <div className={styles.noticesContainer}>
       <h1>
-        <Link to={`/`}>Notice board </Link>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "active" : ""
+          }
+          to={`/`}
+        >
+          Notice board{" "}
+        </NavLink>
       </h1>
       <ToggleElement ref={toggleElementBtn} btnText={"Add Notice"}>
         <FormField
@@ -75,7 +82,7 @@ const Notices = ({ notices, setNotices, setNoticeDetails }) => {
       <div className={styles.allNotices}>
         {Boolean(notices.length > 0)
           ? notices.map((notice) => (
-              <Link
+              <NavLink
                 onClick={handleNoticeDetails}
                 key={notice.id}
                 data-id={notice.id}
@@ -88,7 +95,7 @@ const Notices = ({ notices, setNotices, setNoticeDetails }) => {
                   lastName={notice.last_name}
                   date={notice.date}
                 />
-              </Link>
+              </NavLink>
             ))
           : null}
       </div>

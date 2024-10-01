@@ -35,7 +35,10 @@ const NoticeDetails = ({ notices, setNotices }) => {
     setIsEditDeleteVisiable(false);
     // after reset the from field it become empty
     // if the user wanted to edit again
-    setFormValues({ noticeTitle: notice, noticeDescription: description });
+    setFormValues({
+      noticeTitle: noticeDetails !== "" ? noticeDetails.notice : "",
+      noticeDescription: noticeDetails !== "" ? noticeDetails.description : "",
+    });
   };
 
   const handleDeleteBtn = () => {
@@ -123,8 +126,9 @@ const NoticeDetails = ({ notices, setNotices }) => {
       <Dialog isOpen={isOpenDialog} name="deleteDialog" onClose={handleClose}>
         <DeleteRecord onDelete={handleDeleteNotice} onCancel={handleClose} />
       </Dialog>
+
       {isEditForm ? (
-        <div>
+        <div className={styles.editNoticeContainer}>
           <button onClick={handleCloseBtn}>Close</button>
           <FormField
             formData={formData}

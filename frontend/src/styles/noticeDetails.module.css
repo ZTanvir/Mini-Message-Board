@@ -7,8 +7,17 @@
   background-color: #f4fbfe;
   height: 100vh;
 }
+.noticeDetailsContainer dialog[open] {
+  place-self: center;
+  border: none;
+  border-radius: 1rem;
+}
+.noticeDetailsContainer dialog[open]::backdrop {
+  background-color: rgb(0 0 0 / 25%);
+  backdrop-filter: blur(3px);
+}
 
-:is(.noticeDetails, .commentsContainer) {
+:is(.noticeDetails, .commentsContainer, .editNoticeContainer) {
   grid-column: 2/3;
 }
 

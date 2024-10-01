@@ -99,13 +99,13 @@ const Comments = ({ noticeId }) => {
           ))}
         </section>
       ) : null}
-      <form id="addComment" onSubmit={handleSubmitComment}>
+      <form id={style.addCommentForm} onSubmit={handleSubmitComment}>
         <button type="button" onClick={handleCancelSubmitForm}>
           Cancel
         </button>
-        <div>
+        <div className={style.addCommentContainer}>
           <textarea
-            rows={2}
+            rows={1}
             cols={50}
             value={userComment["comment"]}
             onChange={(e) =>
