@@ -10,7 +10,7 @@ import DeleteRecord from "../Form/DeleteRecord";
 import Loader from "../Loader";
 import styles from "../../styles/noticeDetails.module.css";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const NoticeDetails = ({ notices, setNotices }) => {
   const [isEditDeleteVisiable, setIsEditDeleteVisiable] = useState(false);
@@ -130,6 +130,10 @@ const NoticeDetails = ({ notices, setNotices }) => {
     <div className={styles.noticeDetailsContainer}>
       {Boolean(noticeDetails) > 0 ? (
         <div className={styles.allNoticeSections}>
+          <h1>
+            <Link to="/">Notice Board </Link>
+          </h1>
+
           <Dialog
             isOpen={isOpenDialog}
             name="deleteDialog"
