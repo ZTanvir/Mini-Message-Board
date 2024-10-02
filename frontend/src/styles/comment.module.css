@@ -22,6 +22,16 @@
   top: -37px;
   left: 37px;
 }
+.toggleEditedComment {
+  color: blue;
+  cursor: pointer;
+}
+.toggleEditedComment:hover {
+  text-decoration: underline;
+}
+.editCommentText {
+  font-weight: 200;
+}
 
 :is(.commentText, .oldComment) {
   font-weight: 300;

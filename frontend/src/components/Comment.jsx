@@ -17,6 +17,7 @@ const Comment = ({
 }) => {
   const [showEditDelete, setShowEditDelete] = useState(false);
   const [isShowDialog, setIsShowDialog] = useState(false);
+  const [showOldComment, setShowOldComment] = useState(null);
 
   const { id, first_name, last_name, date, comment, old_comment } = commentData;
   const fullName = first_name + " " + last_name;
@@ -59,6 +60,9 @@ const Comment = ({
     }
     deleteComment();
   };
+  const handleDisplayOldComment = () => {
+    setShowOldComment(!showOldComment);
+  };
 
   return (
     <>
@@ -77,9 +81,19 @@ const Comment = ({
           </div>
         </header>
         <main>
-          <p className={style.oldComment}>
-            <span>{"edited"}</span>
-          </p>
+          <div className={style.oldComment}>
+            <div>
+              <p
+                className={style.toggleEditedComment}
+                onClick={handleDisplayOldComment}
+              >
+                {old_comment && (showOldComment ? "Hide edit" : "edited")}
+              </p>
+              <p className={style.editCommentText}>
+                {showOldComment && old_comment}
+              </p>
+            </div>
+          </div>
           <div>
             <div className={style.commentTextContainer}>
               <p className={style.commentText}>{comment}</p>
