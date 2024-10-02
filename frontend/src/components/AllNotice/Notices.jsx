@@ -44,7 +44,6 @@ const Notices = ({ notices, setNotices, setNoticeDetails }) => {
     const noticeDataObj = { ...noticeData[0] };
     setNoticeDetails(noticeDataObj);
   };
-  console.log(notices);
 
   useEffect(() => {
     const getNotices = async () => {
@@ -52,7 +51,7 @@ const Notices = ({ notices, setNotices, setNoticeDetails }) => {
         const data = await NoticesService.getAll();
         setTimeout(() => {
           setNotices([...data]);
-        }, 3000);
+        }, 2000);
       } catch (error) {
         console.error(error);
       }
