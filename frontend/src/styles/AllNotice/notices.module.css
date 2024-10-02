@@ -9,8 +9,15 @@
   text-align: center;
   font-size: 2.125rem;
 }
-
-:is(.noticesContainer h1, .noticesContainer h1 + div, .allNotices) {
+.loaderScreen {
+  justify-self: center;
+}
+:is(
+    .noticesContainer h1,
+    .noticesContainer h1 + div,
+    .toggleSection,
+    .allNotices
+  ) {
   grid-column: 2/3;
 }
 .allNotices {

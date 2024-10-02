@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import Notice from "./Notice";
-import NoticeDetails from "./NoticeDetails";
 import NoticesService from "../../services/notices";
 import ToggleElement from "../ToggleElement";
 import FormField from "../Form/FormField";
+import Loader from "../Loader";
 import NoticeFormData from "../Form/NoticeFormData";
 import styles from "../../styles/AllNotice/notices.module.css";
 import { NavLink } from "react-router-dom";
@@ -66,19 +66,25 @@ const Notices = ({ notices, setNotices, setNoticeDetails }) => {
           }
           to={`/`}
         >
-          Notice board{" "}
+          Notice board
         </NavLink>
       </h1>
-      <ToggleElement ref={toggleElementBtn} btnText={"Add Notice"}>
-        <FormField
-          formData={NoticeFormData}
-          formName={"addNotice"}
-          formValues={formValues}
-          isResetForm={false}
-          setFormValues={setFormValues}
-          handleSubmitFrom={handleAddNewNotice}
-        />
-      </ToggleElement>
+      <div className={styles.loaderScreen}>
+        <Loader />
+      </div>
+      <div className={styles.toggleSection}>
+        <ToggleElement ref={toggleElementBtn} btnText={"Add Notice"}>
+          <FormField
+            formData={NoticeFormData}
+            formName={"addNotice"}
+            formValues={formValues}
+            isResetForm={false}
+            setFormValues={setFormValues}
+            handleSubmitFrom={handleAddNewNotice}
+          />
+        </ToggleElement>
+      </div>
+
       <div className={styles.allNotices}>
         {Boolean(notices.length > 0)
           ? notices.map((notice) => (
