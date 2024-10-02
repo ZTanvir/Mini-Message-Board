@@ -81,8 +81,8 @@ const Comments = ({ noticeId }) => {
   return (
     <>
       {comments.length > 0 ? (
-        <section className={style.commentContainer}>
-          <h3>
+        <section className={style.commentsContainer}>
+          <h3 className={style.totalComment}>
             Comments (
             {comments.length < 10 ? `0${comments.length}` : comments.length})
           </h3>

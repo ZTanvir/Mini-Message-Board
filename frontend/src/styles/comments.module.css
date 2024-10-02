@@ -1,10 +1,13 @@
-.commentContainer {
+.commentsContainer {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 .addCommentContainer {
   display: flex;
+}
+.totalComment {
+  font-weight: 400;
 }
 #addCommentForm {
   display: flex;
@@ -21,14 +24,14 @@
   border-radius: 6px;
   position: relative;
 }
-.addCommentContainer textarea {
+.addCommentContainer > textarea {
   resize: none;
   border-radius: 6px;
 }
-.addCommentContainer textarea {
+.addCommentContainer > textarea {
   background-color: #ebf9ff;
 }
-.addCommentContainer button {
+.addCommentContainer > button {
   background-color: #03a9f4;
   display: flex;
   justify-content: center;
@@ -39,6 +42,6 @@
   right: 0;
   height: 100%;
 }
-.addCommentContainer button span {
+.addCommentContainer > button > span {
   transform: rotate(318deg);
 }

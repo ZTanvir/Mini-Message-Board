@@ -21,7 +21,6 @@ const Comment = ({
   const { id, first_name, last_name, date, comment, old_comment } = commentData;
   const fullName = first_name + " " + last_name;
   const commentId = id;
-  const lastComment = old_comment;
 
   const handleModifyComment = () => {
     setShowEditDelete(!showEditDelete);
@@ -78,25 +77,27 @@ const Comment = ({
           </div>
         </header>
         <main>
-          <p>
-            <span>edited</span>
+          <p className={style.oldComment}>
+            <span>{"edited"}</span>
           </p>
           <div>
-            <div>
+            <div className={style.commentTextContainer}>
               <p className={style.commentText}>{comment}</p>
-              <div>
+              <div className={style.commentAndEditContainer}>
                 <span
                   onClick={handleModifyComment}
                   className="material-symbols-outlined"
                 >
                   more_horiz
                 </span>
-                {showEditDelete && (
-                  <EditDelete
-                    handleEditBtn={handleUpdateUi}
-                    handleDeleteBtn={handleDeleteUi}
-                  />
-                )}
+                <div className={style.editAndDeleteContainer}>
+                  {showEditDelete && (
+                    <EditDelete
+                      handleEditBtn={handleUpdateUi}
+                      handleDeleteBtn={handleDeleteUi}
+                    />
+                  )}
+                </div>
               </div>
             </div>
           </div>

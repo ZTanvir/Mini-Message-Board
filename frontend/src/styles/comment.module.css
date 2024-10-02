@@ -8,5 +8,21 @@
 .username div span {
   font-weight: 500 !important;
 }
-.commentText {
+
+.commentTextContainer {
+  display: flex;
+  flex-direction: row;
+}
+.commentAndEditContainer {
+  cursor: pointer;
+  position: relative;
+}
+.editAndDeleteContainer {
+  position: absolute;
+  top: -37px;
+  left: 37px;
+}
+
+:is(.commentText, .oldComment) {
+  font-weight: 300;
 }
