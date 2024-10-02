@@ -44,12 +44,15 @@ const Notices = ({ notices, setNotices, setNoticeDetails }) => {
     const noticeDataObj = { ...noticeData[0] };
     setNoticeDetails(noticeDataObj);
   };
+  console.log(notices);
 
   useEffect(() => {
     const getNotices = async () => {
       try {
         const data = await NoticesService.getAll();
-        setNotices([...data]);
+        setTimeout(() => {
+          setNotices([...data]);
+        }, 3000);
       } catch (error) {
         console.error(error);
       }
@@ -69,42 +72,48 @@ const Notices = ({ notices, setNotices, setNoticeDetails }) => {
           Notice board
         </NavLink>
       </h1>
-      <div className={styles.loaderScreen}>
-        <Loader />
-      </div>
-      <div className={styles.toggleSection}>
-        <ToggleElement ref={toggleElementBtn} btnText={"Add Notice"}>
-          <FormField
-            formData={NoticeFormData}
-            formName={"addNotice"}
-            formValues={formValues}
-            isResetForm={false}
-            setFormValues={setFormValues}
-            handleSubmitFrom={handleAddNewNotice}
-          />
-        </ToggleElement>
-      </div>
+      {/*Show loading screen untill notice data return from server */}
+      {notices.length > 0 ? (
+        <div className={styles.allNotices}>
+          <div className={styles.toggleSection}>
+            <ToggleElement ref={toggleElementBtn} btnText={"Add Notice"}>
+              <FormField
+                formData={NoticeFormData}
+                formName={"addNotice"}
+                formValues={formValues}
+                isResetForm={false}
+                setFormValues={setFormValues}
+                handleSubmitFrom={handleAddNewNotice}
+              />
+            </ToggleElement>
+          </div>
 
-      <div className={styles.allNotices}>
-        {Boolean(notices.length > 0)
-          ? notices.map((notice) => (
-              <NavLink
-                onClick={handleNoticeDetails}
-                key={notice.id}
-                data-id={notice.id}
-                to={`notice/${notice.id}`}
-              >
-                <Notice
-                  id={notice.id}
-                  title={notice.notice}
-                  firstName={notice.first_name}
-                  lastName={notice.last_name}
-                  date={notice.date}
-                />
-              </NavLink>
-            ))
-          : null}
-      </div>
+          <div className={styles.allNotices}>
+            {Boolean(notices.length > 0)
+              ? notices.map((notice) => (
+                  <NavLink
+                    onClick={handleNoticeDetails}
+                    key={notice.id}
+                    data-id={notice.id}
+                    to={`notice/${notice.id}`}
+                  >
+                    <Notice
+                      id={notice.id}
+                      title={notice.notice}
+                      firstName={notice.first_name}
+                      lastName={notice.last_name}
+                      date={notice.date}
+                    />
+                  </NavLink>
+                ))
+              : null}
+          </div>
+        </div>
+      ) : (
+        <div className={styles.loaderScreen}>
+          <Loader />
+        </div>
+      )}
     </div>
   );
 };
