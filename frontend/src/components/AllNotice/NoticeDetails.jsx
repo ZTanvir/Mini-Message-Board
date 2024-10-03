@@ -202,7 +202,9 @@ const NoticeDetails = ({ notices, setNotices }) => {
               <div className={styles.horizontalLine}></div>
               <main>
                 <h3>Notice Details</h3>
-                <p>{noticeDetails.description}</p>
+                <p className={styles.noticeDescriptions}>
+                  {noticeDetails.description}
+                </p>
               </main>
             </section>
           )}

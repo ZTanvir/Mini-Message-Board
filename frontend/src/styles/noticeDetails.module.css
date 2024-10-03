@@ -1,6 +1,6 @@
 .noticeDetailsContainer {
   display: grid;
-  height: 100vh;
+  height: 100%;
 }
 .loaderScreen {
   place-self: center;
@@ -88,5 +88,6 @@
   height: 2px;
   background-color: rgb(240, 236, 236);
 }
-.commentsContainer {
+.noticeDescriptions {
+  white-space: pre-wrap;
 }
