@@ -14,6 +14,7 @@ const Comment = ({
   commentData,
   userComment,
   setUserComment,
+  commentFormBoxEl,
 }) => {
   const [showEditDelete, setShowEditDelete] = useState(false);
   const [isShowDialog, setIsShowDialog] = useState(false);
@@ -27,6 +28,8 @@ const Comment = ({
     setShowEditDelete(!showEditDelete);
   };
   const handleUpdateUi = () => {
+    // take user to the text area input box
+    commentFormBoxEl.current.focus();
     // hide edit delete section
     setShowEditDelete(false);
     // make comment status as edit comment

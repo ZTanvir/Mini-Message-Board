@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import style from "../styles/comments.module.css";
 import Comment from "./Comment";
 import CommentService from "../services/comments";
@@ -9,6 +9,8 @@ const Comments = ({ noticeId }) => {
     comment: "",
     isEdit: false,
   });
+
+  const addCommentTextAreaEl = useRef(null);
 
   const handleSubmitComment = (e) => {
     e.preventDefault();
@@ -99,6 +101,7 @@ const Comments = ({ noticeId }) => {
               commentData={comment}
               userComment={userComment}
               setUserComment={setUserComment}
+              commentFormBoxEl={addCommentTextAreaEl}
             />
           ))}
         </section>
@@ -113,6 +116,7 @@ const Comments = ({ noticeId }) => {
         </button>
         <div className={style.addCommentContainer}>
           <textarea
+            ref={addCommentTextAreaEl}
             rows={1}
             cols={50}
             value={userComment["comment"]}
