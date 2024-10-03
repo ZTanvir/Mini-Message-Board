@@ -97,7 +97,10 @@ const Comment = ({
           <div>
             <div className={style.commentTextContainer}>
               <p className={style.commentText}>{comment}</p>
-              <div className={style.commentAndEditContainer}>
+              <div
+                title="Edit Or Delete"
+                className={style.commentAndEditContainer}
+              >
                 <span
                   onClick={handleModifyComment}
                   className="material-symbols-outlined"
