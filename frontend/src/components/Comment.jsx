@@ -83,12 +83,12 @@ const Comment = ({
         <main>
           <div className={style.oldComment}>
             <div>
-              <p
+              <span
                 className={style.toggleEditedComment}
                 onClick={handleDisplayOldComment}
               >
                 {old_comment && (showOldComment ? "Hide edit" : "edited")}
-              </p>
+              </span>
               <p className={style.editCommentText}>
                 {showOldComment && old_comment}
               </p>

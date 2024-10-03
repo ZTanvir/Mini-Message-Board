@@ -108,8 +108,6 @@ const NoticeDetails = ({ notices, setNotices }) => {
     deleteNotice();
   };
 
-  console.log(noticeDetails);
-
   useEffect(() => {
     const { id } = noticeUrlId;
 

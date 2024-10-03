@@ -12,6 +12,8 @@
 .commentTextContainer {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 1rem;
 }
 .commentAndEditContainer {
   cursor: pointer;
@@ -31,6 +33,9 @@
 }
 .editCommentText {
   font-weight: 200;
+}
+.commentText {
+  white-space: pre-wrap;
 }
 
 :is(.commentText, .oldComment) {

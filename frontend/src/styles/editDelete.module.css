@@ -1,6 +1,6 @@
 .editDeleteContainer {
   width: 150px;
-  height: 100px;
+  height: min-content;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

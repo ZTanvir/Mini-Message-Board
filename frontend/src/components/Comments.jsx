@@ -37,9 +37,13 @@ const Comments = ({ noticeId }) => {
       updateComment();
     } else {
       const commentText = userComment.comment;
+      // fixed user 1
+      // update here when add authentication
       const userId = 1;
       async function addComment() {
         try {
+          console.log(commentText.split());
+
           const addComment = await CommentService.addComment(
             noticeId,
             userId,
@@ -99,7 +103,11 @@ const Comments = ({ noticeId }) => {
           ))}
         </section>
       ) : null}
-      <form id={style.addCommentForm} onSubmit={handleSubmitComment}>
+      <form
+        id={style.addCommentForm}
+        onSubmit={handleSubmitComment}
+        encType="multipart/form-data"
+      >
         <button type="button" onClick={handleCancelSubmitForm}>
           Cancel
         </button>

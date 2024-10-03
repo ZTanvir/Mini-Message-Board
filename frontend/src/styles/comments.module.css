@@ -27,6 +27,7 @@
 .addCommentContainer > textarea {
   resize: none;
   border-radius: 6px;
+  white-space: pre-wrap;
 }
 .addCommentContainer > textarea {
   background-color: #ebf9ff;
