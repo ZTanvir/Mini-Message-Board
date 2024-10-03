@@ -60,7 +60,9 @@ h6 {
 #__next {
   isolation: isolate;
 }
-body {
+html,
+body,
+#root {
   font-family: "Roboto", sans-serif;
   height: 100%;
 }
