@@ -4,7 +4,7 @@ import NoticesService from "../../services/notices";
 import ToggleElement from "../ToggleElement";
 import FormField from "../Form/FormField";
 import Loader from "../Loader";
-import Dropdown from "../Dropdown";
+import Filter from "../Filter";
 import NoticeFormData from "../Form/NoticeFormData";
 import styles from "../../styles/AllNotice/notices.module.css";
 import { NavLink } from "react-router-dom";
@@ -64,14 +64,8 @@ const Notices = ({ notices, setNotices }) => {
           Notice board
         </NavLink>
       </h1>
-      <Dropdown
-        text="January"
-        values={[
-          { name: "January", id: crypto.randomUUID() },
-          { name: "February", id: crypto.randomUUID() },
-          { name: "March", id: crypto.randomUUID() },
-        ]}
-      />
+      <Filter />
+
       {/*Show loading screen untill notice data return from server */}
       {notices.length > 0 ? (
         <div className={styles.allNotices}>

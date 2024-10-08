@@ -1,0 +1,17 @@
+.filterContainer {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 0rem 0.25rem;
+}
+.leftItems {
+  height: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  padding-top: 0.75rem;
+}
+
+.rightItems {
+  display: flex;
+  gap: 0.5rem;
+}
