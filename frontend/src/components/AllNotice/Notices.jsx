@@ -8,7 +8,7 @@ import NoticeFormData from "../Form/NoticeFormData";
 import styles from "../../styles/AllNotice/notices.module.css";
 import { NavLink } from "react-router-dom";
 
-const Notices = ({ notices, setNotices, setNoticeDetails }) => {
+const Notices = ({ notices, setNotices }) => {
   const [formValues, setFormValues] = useState({
     noticeTitle: "",
     noticeDescription: "",
@@ -35,14 +35,6 @@ const Notices = ({ notices, setNotices, setNoticeDetails }) => {
     addNewNotice();
     // reset add notice form
     setFormValues({ noticeTitle: "", noticeDescription: "" });
-  };
-  const handleNoticeDetails = (e) => {
-    const noticeId = Number(e.currentTarget.dataset.id);
-    const noticeData = notices.filter(
-      (notice) => Number(noticeId) === notice.id
-    );
-    const noticeDataObj = { ...noticeData[0] };
-    setNoticeDetails(noticeDataObj);
   };
 
   useEffect(() => {
@@ -91,7 +83,6 @@ const Notices = ({ notices, setNotices, setNoticeDetails }) => {
             {Boolean(notices.length > 0)
               ? notices.map((notice) => (
                   <NavLink
-                    onClick={handleNoticeDetails}
                     key={notice.id}
                     data-id={notice.id}
                     to={`notice/${notice.id}`}
