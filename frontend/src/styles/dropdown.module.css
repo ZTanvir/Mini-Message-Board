@@ -1,5 +1,6 @@
 .dropdownMenu {
   width: fit-content;
+  position: relative;
 }
 .dropdownBtn {
   display: flex;
@@ -25,6 +26,9 @@
   border-radius: 1rem;
   color: white;
   overflow: hidden;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
 }
 .dropdownItem {
   padding: 0.5rem 0rem;

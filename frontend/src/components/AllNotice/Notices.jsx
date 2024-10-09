@@ -64,11 +64,11 @@ const Notices = ({ notices, setNotices }) => {
           Notice board
         </NavLink>
       </h1>
-      <Filter />
 
       {/*Show loading screen untill notice data return from server */}
       {notices.length > 0 ? (
         <div className={styles.allNotices}>
+          <Filter />
           <div className={styles.toggleSection}>
             <ToggleElement ref={toggleElementBtn} btnText={"Add Notice"}>
               <FormField

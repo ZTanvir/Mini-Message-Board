@@ -19,19 +19,19 @@ const Dropdown = ({ text, values }) => {
           {isValuesShown ? "keyboard_arrow_down" : "keyboard_arrow_up"}
         </span>
       </button>
-      <ul className={styles.dropdownItems}>
-        {values.length > 0 && isValuesShown
-          ? values.map((value) => (
-              <li
-                onClick={handleDropDownItems}
-                className={styles.dropdownItem}
-                key={value.id}
-              >
-                {value.name}
-              </li>
-            ))
-          : null}
-      </ul>
+      {values.length > 0 && isValuesShown ? (
+        <ul className={styles.dropdownItems}>
+          {values.map((value) => (
+            <li
+              onClick={handleDropDownItems}
+              className={styles.dropdownItem}
+              key={value.id}
+            >
+              {value.name}
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </div>
   );
 };
