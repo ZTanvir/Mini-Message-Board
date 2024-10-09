@@ -1,7 +1,8 @@
 import Dropdown from "./Dropdown";
+import HelperFuntions from "../Utils/HelperFuntions";
 import styles from "../styles/filter.module.css";
 
-const Filter = ({}) => {
+const Filter = ({ filterData, setFilterData }) => {
   const dropDownNames = [
     { id: crypto.randomUUID(), name: "January" },
     { id: crypto.randomUUID(), name: "February" },
@@ -16,7 +17,9 @@ const Filter = ({}) => {
     { id: crypto.randomUUID(), name: "November" },
     { id: crypto.randomUUID(), name: "December" },
   ];
-  const currentYear = new Date().getFullYear();
+  const currentMonth = HelperFuntions.currentMonth;
+
+  const currentYear = HelperFuntions.currentYear;
 
   // contains random id and last 5 years from today
   const dropDownYears = () => {
@@ -36,8 +39,8 @@ const Filter = ({}) => {
         <span className="material-symbols-outlined">filter_alt</span>
       </div>
       <div className={styles.rightItems}>
-        <Dropdown text={"January"} values={dropDownNames} />
-        <Dropdown text={currentYear} values={dropDownYears()} />
+        <Dropdown text={currentMonth} values={dropDownNames} type={"month"} />
+        <Dropdown text={currentYear} values={dropDownYears()} type={"year"} />
       </div>
     </div>
   );

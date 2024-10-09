@@ -1,20 +1,22 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styles from "../styles/dropdown.module.css";
-const Dropdown = ({ text, values }) => {
+const Dropdown = ({ text, values, type }) => {
   const [isValuesShown, setIsValuesShown] = useState(false);
+  const filterNameEl = useRef(null);
 
   const handleDropdownBtn = () => {
     setIsValuesShown(!isValuesShown);
   };
   const handleDropDownItems = (e) => {
     setIsValuesShown(!isValuesShown);
-    console.log(e.currentTarget.innerText);
+    // change button text
+    filterNameEl.current.innerText = e.currentTarget.innerText;
   };
 
   return (
     <div className={styles.dropdownMenu}>
       <button onClick={handleDropdownBtn} className={styles.dropdownBtn}>
-        <span>{text}</span>
+        <span ref={filterNameEl}>{text}</span>
         <span className="material-symbols-outlined">
           {isValuesShown ? "keyboard_arrow_down" : "keyboard_arrow_up"}
         </span>

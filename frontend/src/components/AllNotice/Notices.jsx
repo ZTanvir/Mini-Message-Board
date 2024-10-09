@@ -6,6 +6,7 @@ import FormField from "../Form/FormField";
 import Loader from "../Loader";
 import Filter from "../Filter";
 import NoticeFormData from "../Form/NoticeFormData";
+import HelperFunction from "../../Utils/HelperFuntions";
 import styles from "../../styles/AllNotice/notices.module.css";
 import { NavLink } from "react-router-dom";
 
@@ -13,6 +14,10 @@ const Notices = ({ notices, setNotices }) => {
   const [formValues, setFormValues] = useState({
     noticeTitle: "",
     noticeDescription: "",
+  });
+  const [filterData, setFilterData] = useState({
+    month: HelperFunction.currentMonth,
+    year: HelperFunction.currentYear,
   });
   const toggleElementBtn = useRef(null);
 
