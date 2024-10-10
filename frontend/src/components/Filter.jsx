@@ -39,8 +39,20 @@ const Filter = ({ filterData, setFilterData }) => {
         <span className="material-symbols-outlined">filter_alt</span>
       </div>
       <div className={styles.rightItems}>
-        <Dropdown text={currentMonth} values={dropDownNames} type={"month"} />
-        <Dropdown text={currentYear} values={dropDownYears()} type={"year"} />
+        <Dropdown
+          text={currentMonth}
+          values={dropDownNames}
+          type="month"
+          filterData={filterData}
+          setFilterData={setFilterData}
+        />
+        <Dropdown
+          text={currentYear}
+          values={dropDownYears()}
+          type="year"
+          filterData={filterData}
+          setFilterData={setFilterData}
+        />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import styles from "../styles/dropdown.module.css";
-const Dropdown = ({ text, values, type }) => {
+const Dropdown = ({ text, values, type, filterData, setFilterData }) => {
   const [isValuesShown, setIsValuesShown] = useState(false);
   const filterNameEl = useRef(null);
 
@@ -11,6 +11,11 @@ const Dropdown = ({ text, values, type }) => {
     setIsValuesShown(!isValuesShown);
     // change button text
     filterNameEl.current.innerText = e.currentTarget.innerText;
+    if (type === "month") {
+      setFilterData({ ...filterData, month: e.currentTarget.innerText });
+    } else if (type === "year") {
+      setFilterData({ ...filterData, year: e.currentTarget.innerText });
+    }
   };
 
   return (

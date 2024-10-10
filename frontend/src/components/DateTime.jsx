@@ -3,7 +3,7 @@ const DateTime = ({ showIcon, date, time }) => {
   const formateDate = (dateTime = "") => {
     // "YYYY-MM-DD HH:MM:SS"
     let yearMonthDay = dateTime.split(" ")[0];
-    // 04 June, 2022
+    // 2022 June, 04
     let [year, month, day] = yearMonthDay.split("-");
     const monthNames = [
       "January",
@@ -19,7 +19,8 @@ const DateTime = ({ showIcon, date, time }) => {
       "November",
       "December",
     ];
-    month = monthNames[Number(month)];
+    // Subtracted -1 cause sqlite start storeing month from 01(January)
+    month = monthNames[Number(month) - 1];
 
     return `${day} ${month}, ${year}`;
   };

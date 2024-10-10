@@ -21,6 +21,40 @@ const Notices = ({ notices, setNotices }) => {
   });
   const toggleElementBtn = useRef(null);
 
+  const filterNoticeData = (noticeData = []) => {
+    const months = {
+      January: "01",
+      February: "02",
+      March: "03",
+      April: "04",
+      May: "05",
+      June: "06",
+      July: "07",
+      August: "08",
+      September: "09",
+      October: "10",
+      November: "11",
+      December: "12",
+    };
+
+    const filterNoticeList = noticeData.filter((notice) => {
+      // get month and year from notices date
+      let [noticeDate, noticeTime] = notice.date.split(" ");
+      let [noticeYear, noticeMonth, noticeDay] = noticeDate.split("-");
+      // get filter month and year
+      let [filterMonth, filterYear] = [filterData.month, filterData.year];
+      // convert month name to number
+      filterMonth = months[filterMonth];
+
+      let noticeYearMonth = `${noticeYear}-${noticeMonth}`;
+      let filterYearMonth = `${filterYear}-${filterMonth}`;
+
+      // match filter monthMonthYear to noticemonthYear
+      return noticeYearMonth === filterYearMonth;
+    });
+    return filterNoticeList;
+  };
+
   const handleAddNewNotice = (e) => {
     e.preventDefault();
     async function addNewNotice() {
@@ -42,6 +76,8 @@ const Notices = ({ notices, setNotices }) => {
     // reset add notice form
     setFormValues({ noticeTitle: "", noticeDescription: "" });
   };
+
+  console.log("filterNoticeData:", filterNoticeData(notices));
 
   useEffect(() => {
     const getNotices = async () => {
@@ -71,9 +107,9 @@ const Notices = ({ notices, setNotices }) => {
       </h1>
 
       {/*Show loading screen untill notice data return from server */}
-      {notices.length > 0 ? (
+      {filterNoticeData(notices).length > 0 ? (
         <div className={styles.allNotices}>
-          <Filter />
+          <Filter filterData={filterData} setFilterData={setFilterData} />
           <div className={styles.toggleSection}>
             <ToggleElement ref={toggleElementBtn} btnText={"Add Notice"}>
               <FormField
@@ -88,8 +124,8 @@ const Notices = ({ notices, setNotices }) => {
           </div>
 
           <div className={styles.allNotices}>
-            {Boolean(notices.length > 0)
-              ? notices.map((notice) => (
+            {Boolean(filterNoticeData(notices).length > 0)
+              ? filterNoticeData(notices).map((notice) => (
                   <NavLink
                     key={notice.id}
                     data-id={notice.id}
