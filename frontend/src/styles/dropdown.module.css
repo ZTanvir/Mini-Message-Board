@@ -19,6 +19,7 @@
   color: white;
 }
 .dropdownItems {
+  margin-top: 0.25rem;
   padding: 0;
   list-style: none;
   background-color: cornflowerblue;

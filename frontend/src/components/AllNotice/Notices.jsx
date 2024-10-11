@@ -94,8 +94,6 @@ const Notices = ({ notices, setNotices }) => {
     getNotices();
   }, []);
 
-  console.log(toggleLoader);
-
   return (
     <div className={styles.noticesContainer}>
       <h1>
