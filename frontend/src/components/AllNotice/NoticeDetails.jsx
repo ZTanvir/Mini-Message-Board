@@ -163,21 +163,24 @@ const NoticeDetails = ({ notices, setNotices }) => {
             >
               <header>
                 <div className={styles.titleIconContainer}>
-                  <h2 className={styles.noticeTitle}>
-                    {noticeDetails.notice}
+                  <h2 className={styles.noticeTitle}>{noticeDetails.notice}</h2>
+                  <div className={styles.editDeleteNoticeContainer}>
                     <span
                       onClick={handleEditNotice}
                       className="material-symbols-outlined"
                     >
                       more_horiz
                     </span>
-                  </h2>
-                  {isEditDeleteVisiable && (
-                    <EditDelete
-                      handleEditBtn={handleEditBtn}
-                      handleDeleteBtn={handleDeleteBtn}
-                    />
-                  )}
+                    <div className={styles.editDeleteCommentContainer}>
+                      {isEditDeleteVisiable && (
+                        <EditDelete
+                          handleEditBtn={handleEditBtn}
+                          handleDeleteBtn={handleDeleteBtn}
+                        />
+                      )}
+                    </div>
+                  </div>
+
                   <div className={styles.noticeTitleIcon}>
                     <span
                       className={`material-symbols-outlined ${styles.noticeTitleIconImg}`}

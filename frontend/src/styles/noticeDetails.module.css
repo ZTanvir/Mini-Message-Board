@@ -24,6 +24,7 @@
 }
 .allNoticeSections h1 {
   text-align: center;
+  margin-bottom: 1rem;
 }
 .allNoticeSections > h1 > a {
   text-decoration: none;
@@ -37,6 +38,27 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+.editDeleteNoticeContainer {
+  order: 1;
+  position: relative;
+  display: flex;
+}
+.editDeleteNoticeContainer > span {
+  background-color: rgb(218, 217, 217);
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  margin-left: 0.25rem;
+  display: flex;
+  cursor: pointer;
+}
+
+.editDeleteCommentContainer {
+  position: absolute;
+  z-index: 1;
+  left: 42px;
+  top: -40px;
 }
 .noticeTitle {
   order: 1;
