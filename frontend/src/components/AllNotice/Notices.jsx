@@ -19,8 +19,10 @@ const Notices = ({ notices, setNotices }) => {
     month: HelperFunction.currentMonth,
     year: HelperFunction.currentYear,
   });
+  const [toggleLoader, setTooggleLoader] = useState(true);
   const toggleElementBtn = useRef(null);
 
+  // filter notices based on filter month and year value
   const filterNoticeData = (noticeData = []) => {
     const months = {
       January: "01",
@@ -77,14 +79,13 @@ const Notices = ({ notices, setNotices }) => {
     setFormValues({ noticeTitle: "", noticeDescription: "" });
   };
 
-  console.log("filterNoticeData:", filterNoticeData(notices));
-
   useEffect(() => {
     const getNotices = async () => {
       try {
         const data = await NoticesService.getAll();
         setTimeout(() => {
           setNotices([...data]);
+          setTooggleLoader(false);
         }, 2000);
       } catch (error) {
         console.error(error);
@@ -93,61 +94,61 @@ const Notices = ({ notices, setNotices }) => {
     getNotices();
   }, []);
 
+  console.log(toggleLoader);
+
   return (
     <div className={styles.noticesContainer}>
       <h1>
-        <NavLink
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
-          }
-          to={`/`}
-        >
-          Notice board
-        </NavLink>
+        <NavLink to={`/`}>Notice board</NavLink>
       </h1>
+      <Filter filterData={filterData} setFilterData={setFilterData} />
+      <div className={styles.toggleSection}>
+        <ToggleElement ref={toggleElementBtn} btnText={"Add Notice"}>
+          <FormField
+            formData={NoticeFormData}
+            formName={"addNotice"}
+            formValues={formValues}
+            isResetForm={false}
+            setFormValues={setFormValues}
+            handleSubmitFrom={handleAddNewNotice}
+          />
+        </ToggleElement>
+      </div>
 
-      {/*Show loading screen untill notice data return from server */}
-      {filterNoticeData(notices).length > 0 ? (
-        <div className={styles.allNotices}>
-          <Filter filterData={filterData} setFilterData={setFilterData} />
-          <div className={styles.toggleSection}>
-            <ToggleElement ref={toggleElementBtn} btnText={"Add Notice"}>
-              <FormField
-                formData={NoticeFormData}
-                formName={"addNotice"}
-                formValues={formValues}
-                isResetForm={false}
-                setFormValues={setFormValues}
-                handleSubmitFrom={handleAddNewNotice}
+      <div
+        style={
+          toggleLoader
+            ? { gridAutoRows: "auto" }
+            : { gridAutoRows: "min-content" }
+        }
+        className={styles.allNotices}
+      >
+        {/*Show/hide loading screen untill notice data return from server */}
+        {toggleLoader ? (
+          <div className={styles.loaderScreen}>
+            <Loader />
+          </div>
+        ) : // Display notice or no notice based on server response
+        Boolean(filterNoticeData(notices).length) ? (
+          filterNoticeData(notices).map((notice) => (
+            <NavLink
+              key={notice.id}
+              data-id={notice.id}
+              to={`notice/${notice.id}`}
+            >
+              <Notice
+                id={notice.id}
+                title={notice.notice}
+                firstName={notice.first_name}
+                lastName={notice.last_name}
+                date={notice.date}
               />
-            </ToggleElement>
-          </div>
-
-          <div className={styles.allNotices}>
-            {Boolean(filterNoticeData(notices).length > 0)
-              ? filterNoticeData(notices).map((notice) => (
-                  <NavLink
-                    key={notice.id}
-                    data-id={notice.id}
-                    to={`notice/${notice.id}`}
-                  >
-                    <Notice
-                      id={notice.id}
-                      title={notice.notice}
-                      firstName={notice.first_name}
-                      lastName={notice.last_name}
-                      date={notice.date}
-                    />
-                  </NavLink>
-                ))
-              : null}
-          </div>
-        </div>
-      ) : (
-        <div className={styles.loaderScreen}>
-          <Loader />
-        </div>
-      )}
+            </NavLink>
+          ))
+        ) : (
+          <h1>No notices</h1>
+        )}
+      </div>
     </div>
   );
 };
