@@ -44,8 +44,6 @@ const Comments = ({ noticeId }) => {
       const userId = 1;
       async function addComment() {
         try {
-          console.log(commentText.split());
-
           const addComment = await CommentService.addComment(
             noticeId,
             userId,

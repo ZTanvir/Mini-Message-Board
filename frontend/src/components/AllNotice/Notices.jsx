@@ -19,7 +19,7 @@ const Notices = ({ notices, setNotices }) => {
     month: HelperFunction.currentMonth,
     year: HelperFunction.currentYear,
   });
-  const [toggleLoader, setTooggleLoader] = useState(true);
+  const [toggleLoader, setToggleLoader] = useState(true);
   const toggleElementBtn = useRef(null);
 
   // filter notices based on filter month and year value
@@ -85,7 +85,7 @@ const Notices = ({ notices, setNotices }) => {
         const data = await NoticesService.getAll();
         setTimeout(() => {
           setNotices([...data]);
-          setTooggleLoader(false);
+          setToggleLoader(false);
         }, 2000);
       } catch (error) {
         console.error(error);
@@ -121,7 +121,7 @@ const Notices = ({ notices, setNotices }) => {
         }
         className={styles.allNotices}
       >
-        {/*Show/hide loading screen untill notice data return from server */}
+        {/*Show/hide loading screen until notice data return from server */}
         {toggleLoader ? (
           <div className={styles.loaderScreen}>
             <Loader />

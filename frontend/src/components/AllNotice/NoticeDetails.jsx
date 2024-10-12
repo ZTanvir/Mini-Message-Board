@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 const NoticeDetails = ({ notices, setNotices }) => {
-  const [isEditDeleteVisiable, setIsEditDeleteVisiable] = useState(false);
+  const [isEditDeleteVisible, setIsEditDeleteVisible] = useState(false);
   const [isEditForm, setIsEditForm] = useState(false);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [noticeDetails, setNoticeDetails] = useState("");
@@ -28,12 +28,12 @@ const NoticeDetails = ({ notices, setNotices }) => {
 
   const handleEditNotice = () => {
     // toggle EditDelete component
-    setIsEditDeleteVisiable(!isEditDeleteVisiable);
+    setIsEditDeleteVisible(!isEditDeleteVisible);
   };
 
   const handleEditBtn = (e) => {
     setIsEditForm(true);
-    setIsEditDeleteVisiable(false);
+    setIsEditDeleteVisible(false);
     // after reset the from field it become empty
     // if the user wanted to edit again
     setFormValues({
@@ -44,7 +44,7 @@ const NoticeDetails = ({ notices, setNotices }) => {
 
   const handleDeleteBtn = () => {
     // hide edit delete notice section
-    setIsEditDeleteVisiable(false);
+    setIsEditDeleteVisible(false);
 
     setIsOpenDialog(true);
   };
@@ -132,6 +132,7 @@ const NoticeDetails = ({ notices, setNotices }) => {
             <Link to="/">Notice Board </Link>
           </h1>
 
+          {/* A popup window let you to choose whether or not you want to edit or delete a notice */}
           <Dialog
             isOpen={isOpenDialog}
             name="deleteDialog"
@@ -172,7 +173,7 @@ const NoticeDetails = ({ notices, setNotices }) => {
                       more_horiz
                     </span>
                     <div className={styles.editDeleteCommentContainer}>
-                      {isEditDeleteVisiable && (
+                      {isEditDeleteVisible && (
                         <EditDelete
                           handleEditBtn={handleEditBtn}
                           handleDeleteBtn={handleDeleteBtn}
