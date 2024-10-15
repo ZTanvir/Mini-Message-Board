@@ -10,7 +10,7 @@ import DeleteRecord from "../Form/DeleteRecord";
 import Loader from "../Loader";
 import styles from "../../styles/noticeDetails.module.css";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 const NoticeDetails = ({ notices, setNotices }) => {
   const [isEditDeleteVisible, setIsEditDeleteVisible] = useState(false);
@@ -23,6 +23,7 @@ const NoticeDetails = ({ notices, setNotices }) => {
   });
 
   const noticeUrlId = useParams();
+  const navigate = useNavigate();
 
   const handleEditNotice = () => {
     // toggle EditDelete component
@@ -66,7 +67,7 @@ const NoticeDetails = ({ notices, setNotices }) => {
       try {
         const newNotice = await NoticeService.updateNotice(
           id,
-          1,
+          1, //user Id
           formValues.noticeTitle,
           formValues.noticeDescription
         );
@@ -102,8 +103,8 @@ const NoticeDetails = ({ notices, setNotices }) => {
           (notice) => !(notice.id === deleteNoticeId)
         );
         setIsOpenDialog(false);
-
         setNotices(remainNotices);
+        navigate("/");
       } catch (error) {
         console.error(error);
       }
