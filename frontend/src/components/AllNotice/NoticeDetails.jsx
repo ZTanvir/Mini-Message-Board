@@ -21,9 +21,7 @@ const NoticeDetails = ({ notices, setNotices }) => {
     noticeTitle: noticeDetails !== "" ? noticeDetails.notice : "",
     noticeDescription: noticeDetails !== "" ? noticeDetails.description : "",
   });
-  // const fullName = first_name + " " + last_name;
-  // const noticeId = id;
-  //  id, first_name,last_name,notice,description,date,
+
   const noticeUrlId = useParams();
 
   const handleEditNotice = () => {
@@ -60,11 +58,14 @@ const NoticeDetails = ({ notices, setNotices }) => {
   // Add notice
   const handleSubmitForm = (e) => {
     e.preventDefault();
+    // notice id => got from the url /notice/4
+    const { id } = noticeUrlId;
+
     // send form data to server
     async function sendNotice() {
       try {
         const newNotice = await NoticeService.updateNotice(
-          noticeId,
+          id,
           1,
           formValues.noticeTitle,
           formValues.noticeDescription
@@ -90,9 +91,11 @@ const NoticeDetails = ({ notices, setNotices }) => {
   };
 
   const handleDeleteNotice = () => {
+    // notice id => got from the url /notice/4
+    const { id } = noticeUrlId;
     async function deleteNotice() {
       try {
-        const deletedNotice = await NoticeService.deleteNotice(noticeId);
+        const deletedNotice = await NoticeService.deleteNotice(id);
         const deleteNoticeId = deletedNotice[0].id;
 
         const remainNotices = notices.filter(
@@ -109,6 +112,7 @@ const NoticeDetails = ({ notices, setNotices }) => {
   };
 
   useEffect(() => {
+    // notice id => got from the url /notice/4
     const { id } = noticeUrlId;
 
     async function getNoticeData() {
