@@ -10,7 +10,7 @@ import DeleteRecord from "../Form/DeleteRecord";
 import Loader from "../Loader";
 import styles from "../../styles/noticeDetails.module.css";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 const NoticeDetails = ({ notices, setNotices }) => {
   const [isEditDeleteVisible, setIsEditDeleteVisible] = useState(false);
@@ -21,10 +21,9 @@ const NoticeDetails = ({ notices, setNotices }) => {
     noticeTitle: noticeDetails !== "" ? noticeDetails.notice : "",
     noticeDescription: noticeDetails !== "" ? noticeDetails.description : "",
   });
-  // const fullName = first_name + " " + last_name;
-  // const noticeId = id;
-  //  id, first_name,last_name,notice,description,date,
+
   const noticeUrlId = useParams();
+  const navigate = useNavigate();
 
   const handleEditNotice = () => {
     // toggle EditDelete component
@@ -60,12 +59,15 @@ const NoticeDetails = ({ notices, setNotices }) => {
   // Add notice
   const handleSubmitForm = (e) => {
     e.preventDefault();
+    // notice id => got from the url /notice/4
+    const { id } = noticeUrlId;
+
     // send form data to server
     async function sendNotice() {
       try {
         const newNotice = await NoticeService.updateNotice(
-          noticeId,
-          1,
+          id,
+          1, //user Id
           formValues.noticeTitle,
           formValues.noticeDescription
         );
@@ -90,17 +92,19 @@ const NoticeDetails = ({ notices, setNotices }) => {
   };
 
   const handleDeleteNotice = () => {
+    // notice id => got from the url /notice/4
+    const { id } = noticeUrlId;
     async function deleteNotice() {
       try {
-        const deletedNotice = await NoticeService.deleteNotice(noticeId);
+        const deletedNotice = await NoticeService.deleteNotice(id);
         const deleteNoticeId = deletedNotice[0].id;
 
         const remainNotices = notices.filter(
           (notice) => !(notice.id === deleteNoticeId)
         );
         setIsOpenDialog(false);
-
         setNotices(remainNotices);
+        navigate("/");
       } catch (error) {
         console.error(error);
       }
@@ -109,6 +113,7 @@ const NoticeDetails = ({ notices, setNotices }) => {
   };
 
   useEffect(() => {
+    // notice id => got from the url /notice/4
     const { id } = noticeUrlId;
 
     async function getNoticeData() {
