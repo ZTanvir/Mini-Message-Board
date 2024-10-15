@@ -2,6 +2,14 @@ const logger = require("../utils/logger");
 const db = require("./dbConnection");
 
 db.serialize(() => {
+  const enableForeignKeyQuery = `PRAGMA foreign_keys=ON`;
+
+  db.run(enableForeignKeyQuery, (err) => {
+    err
+      ? logger.error("Error on enable foreign key", err.message)
+      : logger.info("Foreign key enabled successfully.");
+  });
+
   let createUsersTable = `CREATE TABLE IF NOT EXISTS "users"(
         "id" INTEGER,
         "first_name" TEXT NOT NULL,

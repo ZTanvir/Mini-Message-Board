@@ -139,8 +139,9 @@ noticeRouter.delete("/:noticeId", (req, res) => {
       }
     });
 
-    const deleteTable = `DELETE FROM notices WHERE id=?`;
-    db.run(deleteTable, [Number(noticeId)], (err) => {
+    const deleteNotice = `DELETE FROM notices WHERE id=?`;
+
+    db.run(deleteNotice, [Number(noticeId)], (err) => {
       if (err) {
         res
           .status(403)
@@ -149,6 +150,7 @@ noticeRouter.delete("/:noticeId", (req, res) => {
           })
           .end();
       }
+
       !err
         ? res.status(200).json(tableRow)
         : res

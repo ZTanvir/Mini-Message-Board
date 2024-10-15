@@ -3,9 +3,7 @@
   flex-direction: column;
   gap: 0.5rem;
 }
-.addCommentContainer {
-  display: flex;
-}
+
 .totalComment {
   font-weight: 400;
 }
@@ -21,6 +19,8 @@
   cursor: pointer;
 }
 .addCommentContainer {
+  display: flex;
+  min-height: 100px;
   overflow: hidden;
   border-radius: 6px;
   position: relative;

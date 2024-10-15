@@ -97,6 +97,8 @@ const NoticeDetails = ({ notices, setNotices }) => {
     async function deleteNotice() {
       try {
         const deletedNotice = await NoticeService.deleteNotice(id);
+        console.log("deleteNotice", deleteNotice);
+
         const deleteNoticeId = deletedNotice[0].id;
 
         const remainNotices = notices.filter(

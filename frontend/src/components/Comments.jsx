@@ -125,7 +125,7 @@ const Comments = ({ noticeId }) => {
               })
             }
             placeholder={
-              userComment.isEdit ? "Edit comment..." : "Write comment..."
+              userComment.isEdit ? "Edit comment..." : "What's on your mind..."
             }
             required={true}
           />
