@@ -20,7 +20,7 @@ const Notices = ({ notices, setNotices }) => {
     year: HelperFunction.currentYear,
   });
   const [toggleLoader, setToggleLoader] = useState(true);
-  const toggleElementBtn = useRef(null);
+  const toggleElementBtn = useRef(null);  
 
   // filter notices based on filter month and year value
   const filterNoticeData = (noticeData = []) => {

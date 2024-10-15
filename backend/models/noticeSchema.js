@@ -57,7 +57,7 @@ db.serialize(() => {
     if (err) {
       logger.error("user_comment view not created", err.message);
     } else {
-      logger.info("user_comment view created successfull");
+      logger.info("user_comment view created successful");
     }
   });
 
@@ -69,7 +69,7 @@ db.serialize(() => {
     if (err) {
       logger.error("user_notices view not created", err.message);
     } else {
-      logger.info("user_notices view created successfull");
+      logger.info("user_notices view created successful");
     }
   });
   // const query = `INSERT INTO "users"("first_name","last_name")
