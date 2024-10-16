@@ -6,9 +6,9 @@ Our notice board app is your go-to platform for staying connected with your comm
 
 ER diagram for mini message board.
 
-![ER Diagram](./assets/screenshoot/miniNotice-2024-10-16-080134.svg = 500x500)
+![ER Diagram](./assets/screenshoot/miniNotice-2024-10-16-080134.svg)
 
-<img src="./assets/screenshoot/miniNoticeErDiagram.png" width="500" height="500">
+<img src="./assets/screenshoot/miniNoticeErDiagram.png" width="500" height="700">
 
 Within noticebord.db you will find the following tables.Click the drop-downs below to learn more about the schema of each individual table.
 
