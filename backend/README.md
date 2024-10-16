@@ -6,7 +6,6 @@ Our notice board app is your go-to platform for staying connected with your comm
 
 ER diagram for mini message board.
 
-![ER Diagram](./assets/screenshoot/miniNotice-2024-10-16-080134.svg)
 
 <img src="./assets/screenshoot/miniNoticeErDiagram.png" width="500" height="700">
 
