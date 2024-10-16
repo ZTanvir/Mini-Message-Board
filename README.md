@@ -18,25 +18,27 @@
 
 ## General Information
 
-- Provide general information about your project here.
-- What problem does it (intend to) solve?
-- What is the purpose of your project?
-- Why did you undertake it?
-<!-- You don't have to answer all the questions - just the ones relevant to your project. -->
+This web app will help everyone to stay connected with their community.In our everyday life we came across many situations and we wanted to share them with our loved once.But it is hard to reach everyone individually, so if we can share our message in a common platform from where anyone can acknowledge them.
+Then we all will benefit from the web app.
 
 ## Technologies Used
 
-- Tech 1 - version 1.0
-- Tech 2 - version 2.0
-- Tech 3 - version 3.0
+- version 1.0
+
+  - **Frontend**:React,React-router
+  - **Backend**:Express
+  - **Database**:Sqlite3
 
 ## Features
 
-List the ready features here:
+- version 1.0
 
-- Awesome feature 1
-- Awesome feature 2
-- Awesome feature 3
+  - User can add notices to the notice board.
+  - User can filter notice based on month name and year.
+  - User can edit and delete notices.
+  - User can see who has commented on their notice.
+  - User can edit and delete comments.
+  - User can see last edited comments.
 
 ## Screenshots
 
@@ -45,10 +47,6 @@ List the ready features here:
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 ## Setup
-
-What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
-
-Proceed to describe how to install / setup one's local environment / get started with the project.
 
 ## Project Status
 
