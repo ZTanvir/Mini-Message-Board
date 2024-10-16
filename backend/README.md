@@ -6,9 +6,9 @@ Our notice board app is your go-to platform for staying connected with your comm
 
 ER diagram for mini message board.
 
-![ER Diagram](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![ER Diagram](./assets/screenshoot/miniNoticeErDiagram.png)
 
-Within messageBoard.db you will find the following tables.Click the drop-downs below to learn more about the schema of each individual table.
+Within noticebord.db you will find the following tables.Click the drop-downs below to learn more about the schema of each individual table.
 
 <details>
     <summary><code>users</code> table</summary>
@@ -23,7 +23,7 @@ Within messageBoard.db you will find the following tables.Click the drop-downs b
     <code>notices</code> table contains the following columns <br/>
     <code>id</code> which is the id of the notice <br/>
     <code>user_id</code> which is the id of the user who created the notice <br/>    
-    <code>title</code> which is the description of the notice <br/>
+    <code>notice</code> which is the description of the notice <br/>
     <code>description</code> which is the description of the notice <br/>
     <code>date</code> which is the date when the notice created<br/>
 </details>
@@ -46,11 +46,11 @@ REST Resource: notice<br/>
 
 | Methods |                                                                                                                |
 | ------- | -------------------------------------------------------------------------------------------------------------- |
-| get     | GET /notice/all Gets information about the id,first_name,last_name,title,date,descrtiption for notice          |
-| get     | GET /notice/:noticeId Gets notice id,user_id,title,date,descrtiption which match the noticeId                  |
-| post    | POST /notice/new Create a new notice Send user_id,title,date,descrtiption to request body                      |
-| Update  | Put /notice/:noticeId Update the notice which match the parameter id send id,title,description to request body |
-| Delete  | Delete /notice/:noticeId Delete the notice which match the parameter id                                        |
+| get     | GET /notice/all Gets information about the id,first_name,last_name,title,date,description for notice           |
+| get     | GET /notice/:noticeId Gets notice id,user_id,title,date,description which match the noticeId                   |
+| post    | POST /notice/new Create a new notice Send user_id,title,date,description to request body                       |
+| put     | Put /notice/:noticeId Update the notice which match the parameter id send id,title,description to request body |
+| delete  | Delete /notice/:noticeId Delete the notice which match the parameter id                                        |
 
 </br>
 
@@ -59,7 +59,7 @@ REST Resource: comment<br/>
 
 | Methods |                                                                                                                          |
 | ------- | ------------------------------------------------------------------------------------------------------------------------ |
-| get     | GET /comment/all Gets information about the id,notice_id,first_name,last_name,date,descrtiption of the comment           |
-| post    | POST /comment/new Create a new comment,send notice_id,user_id,title,date,descrtiption to request body                    |
-| Update  | PUT /comment/:commentId Update the comment which match the parameter commentId send id,title,description to request body |
-| Delete  | Delete /comment/:commentId Delete the comment which match the parameter id                                               |
+| get     | GET /comment/all Gets information about the id,notice_id,first_name,last_name,date,description of the comment            |
+| post    | POST /comment/new Create a new comment,send notice_id,user_id,title,date,description to request body                     |
+| put     | PUT /comment/:commentId Update the comment which match the parameter commentId send id,title,description to request body |
+| delete  | Delete /comment/:commentId Delete the comment which match the parameter id                                               |
