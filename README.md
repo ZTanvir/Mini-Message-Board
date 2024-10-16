@@ -42,11 +42,34 @@ Then we all will benefit from the web app.
 
 ## Screenshots
 
-![Example screenshot](./img/screenshot.png)
-
-<!-- If you have screenshots you'd like to share, include them here. -->
+![Notice board Landing page](./Screenshoot/NoticeBoardHome.png)
+![Notice board notice details](./Screenshoot/NoticeDetails.png)
+![Edit or delete notice](./Screenshoot/NoticeBoardEditOrDelete.png)
+![Edit notice](./Screenshoot/NoticeBoardEdit.png)
+![Delete notice](./Screenshoot/NoticeBoardDelete.png)
+![Edit or delete comment](./Screenshoot/NoticeBoardEditOrDeleteComment.png)
+![Edit comment](./Screenshoot/NoticeBoardEditComment.png)
+![Delete comment](./Screenshoot/NoticeBoardDelete.png)
 
 ## Setup
+
+- First clone github repo.
+- Create a .env file int he backend folder and add PORT = 3000 to it.
+- Start express server:
+
+```
+    cd backend
+    npm install
+    npm start
+```
+
+- Start react server:
+
+```
+    cd frontend
+    npm install
+    npm run dev
+```
 
 ## Project Status
 

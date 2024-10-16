@@ -13,7 +13,7 @@ const DeleteRecord = ({ onDelete, onCancel }) => {
         alt="A cross inside a red circle"
       />
       <p>
-        Do you really want to delete these records?This process canot be undone
+        Do you really want to delete this record? This process canot be undone
       </p>
       <div className={styles.buttons}>
         <button className={styles.cancelBtn} onClick={onCancel}>
