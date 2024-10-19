@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = `http://localhost:3000/api/notice`;
+const baseUrl = `/api/notice`;
 
 const getAll = async () => {
   try {

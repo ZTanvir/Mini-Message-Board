@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = `http://localhost:3000/api/notice`;
+const baseUrl = `/api/notice`;
 const getComments = async (noticeId) => {
   try {
     const result = await axios.get(`${baseUrl}/${noticeId}/comment/all`);
@@ -13,13 +13,10 @@ const getComments = async (noticeId) => {
 
 const addComment = async (noticeId, userId, comment) => {
   try {
-    const result = await axios.post(
-      `http://localhost:3000/api/notice/${noticeId}/comment/new`,
-      {
-        userId,
-        comment,
-      }
-    );
+    const result = await axios.post(`${baseUrl}/${noticeId}/comment/new`, {
+      userId,
+      comment,
+    });
     const data = await result.data;
     return data;
   } catch (error) {
