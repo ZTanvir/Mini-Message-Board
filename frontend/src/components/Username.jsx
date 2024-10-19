@@ -1,6 +1,7 @@
 const UserName = ({ name }) => {
   const fullNameContainer = {
     display: "flex",
+    display: "none",
     flexDirection: "row",
     alignItems: "center",
     gap: "0.5rem",
