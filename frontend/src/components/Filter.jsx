@@ -1,5 +1,5 @@
 import Dropdown from "./Dropdown";
-import HelperFuntions from "../Utils/HelperFuntions";
+import HelperFuntions from "../Utils/HelperFunctions";
 import styles from "../styles/filter.module.css";
 
 const Filter = ({ filterData, setFilterData }) => {

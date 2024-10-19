@@ -5,22 +5,12 @@ import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-  const [notices, setNotices] = useState([]);
-
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={<Notices notices={notices} setNotices={setNotices} />}
-          />
-          <Route
-            path="/notice/:id"
-            element={
-              <NoticeDetails notices={notices} setNotices={setNotices} />
-            }
-          />
+          <Route path="/" element={<Notices />} />
+          <Route path="/notice/:id" element={<NoticeDetails />} />
         </Routes>
       </BrowserRouter>
     </>

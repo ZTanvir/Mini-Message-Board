@@ -6,11 +6,12 @@ import FormField from "../Form/FormField";
 import Loader from "../Loader";
 import Filter from "../Filter";
 import NoticeFormData from "../Form/NoticeFormData";
-import HelperFunction from "../../Utils/HelperFuntions";
+import HelperFunction from "../../Utils/HelperFunctions";
 import styles from "../../styles/AllNotice/notices.module.css";
 import { NavLink } from "react-router-dom";
 
-const Notices = ({ notices, setNotices }) => {
+const Notices = () => {
+  const [notices, setNotices] = useState([]);
   const [formValues, setFormValues] = useState({
     noticeTitle: "",
     noticeDescription: "",
@@ -20,7 +21,7 @@ const Notices = ({ notices, setNotices }) => {
     year: HelperFunction.currentYear,
   });
   const [toggleLoader, setToggleLoader] = useState(true);
-  const toggleElementBtn = useRef(null);  
+  const toggleElementBtn = useRef(null);
 
   // filter notices based on filter month and year value
   const filterNoticeData = (noticeData = []) => {

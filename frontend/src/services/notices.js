@@ -28,8 +28,8 @@ const addNotice = async (userId, notice, descriptions) => {
       notice: notice,
       description: descriptions,
     });
-    const resonseData = await response.data;
-    return resonseData;
+    const responseData = await response.data;
+    return responseData;
   } catch (error) {
     console.error(error);
   }

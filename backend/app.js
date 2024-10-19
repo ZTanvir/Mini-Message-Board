@@ -9,6 +9,7 @@ const logger = require("./utils/logger");
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static("dist"));
 
 app.use(middleware.requestLogger);
 app.use("/api/notice", noticeRouter);

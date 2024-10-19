@@ -12,7 +12,7 @@ import styles from "../../styles/noticeDetails.module.css";
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
-const NoticeDetails = ({ notices, setNotices }) => {
+const NoticeDetails = () => {
   const [isEditDeleteVisible, setIsEditDeleteVisible] = useState(false);
   const [isEditForm, setIsEditForm] = useState(false);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
@@ -71,12 +71,8 @@ const NoticeDetails = ({ notices, setNotices }) => {
           formValues.noticeTitle,
           formValues.noticeDescription
         );
-        // remove old notice
-        const allNotices = notices.filter(
-          (notice) => !(notice.id === newNotice[0].id)
-        );
-        // add updated notice
-        setNotices([...allNotices, ...newNotice]);
+
+        setNoticeDetails({ ...newNotice[0] });
         // hide add notice form
         setIsEditForm(false);
       } catch (error) {
@@ -97,15 +93,7 @@ const NoticeDetails = ({ notices, setNotices }) => {
     async function deleteNotice() {
       try {
         const deletedNotice = await NoticeService.deleteNotice(id);
-        console.log("deleteNotice", deleteNotice);
-
-        const deleteNoticeId = deletedNotice[0].id;
-
-        const remainNotices = notices.filter(
-          (notice) => !(notice.id === deleteNoticeId)
-        );
         setIsOpenDialog(false);
-        setNotices(remainNotices);
         navigate("/");
       } catch (error) {
         console.error(error);
@@ -121,6 +109,7 @@ const NoticeDetails = ({ notices, setNotices }) => {
     async function getNoticeData() {
       try {
         const noticeData = await NoticeService.getSingleNotice(id);
+
         setTimeout(() => {
           setNoticeDetails(noticeData);
         }, 1000);
